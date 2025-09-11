@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos | PN ANCHOR Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>Video Reels</h1>
+</header>
+
+<section>
+  <div class="video-card">
+    <h3>Patrolling Our Seas</h3>
+    <iframe width="360" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p>Philippine Navy</p>
+</footer>
+</body>
+</html>
