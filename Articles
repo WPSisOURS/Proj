@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PN ANCHOR Hub | Articles</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>Articles & Narratives</h1>
+  <nav>
+    <a href="index.html">Home</a> | <a href="articles.html">Articles</a>
+  </nav>
+</header>
+
+<section>
+  <h2>Latest Articles</h2>
+  <article>
+    <h3>Countering Maritime Disinformation</h3>
+    <p>Hostile actors use social media to weaken public trust. Here’s how PN responds...</p>
+    <a href="#">Read Full Article</a>
+  </article>
+  <article>
+    <h3>Voices from the Fleet</h3>
+    <p>Stories of service and dedication directly from PN personnel...</p>
+    <a href="#">Read Full Article</a>
+  </article>
+</section>
+
+<footer>
+  <p>© 2025 Philippine Navy</p>
+</footer>
+</body>
+</html>
