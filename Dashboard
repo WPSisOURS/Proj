@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PN Operator Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+<header>
+  <h1>Monitoring Dashboard</h1>
+</header>
+
+<section>
+  <h2>Engagement Overview</h2>
+  <canvas id="engagementChart"></canvas>
+
+  <h2>Sentiment Analysis</h2>
+  <canvas id="sentimentChart"></canvas>
+
+  <h2>Operator Console</h2>
+  <form id="consoleForm">
+    <input type="text" placeholder="Enter narrative message">
+    <button type="submit">Post</button>
+  </form>
+  <ul id="alerts"></ul>
+</section>
+</body>
+</html>
