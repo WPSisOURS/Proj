@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | PN ANCHOR Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>About ANCHOR Project</h1>
+</header>
+
+<section>
+  <p>The Active Naval Counter-Hybrid Online Response (ANCHOR) Project strengthens the Philippine Navy’s capacity to counter disinformation, safeguard the information environment, and amplify credible narratives aligned with ComPlan MULAT.</p>
+  <h3>Contact Us</h3>
+  <form>
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea placeholder="Message"></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+</body>
+</html>
