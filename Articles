@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PN ANCHOR Hub | Articles</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 <header>
   <h1>Articles & Narratives</h1>
   <nav>
-    <a href="index.html">Home</a> | <a href="articles.html">Articles</a>
+    <a href="Index.html">Home</a> | <a href="Articles.html">Articles</a>
   </nav>
 </header>
 
