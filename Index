@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PN ANCHOR Hub | Homepage</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="Style.css">
 </head>
 <body>
   <header>
     <img src="assets/img/pn-logo.png" alt="PN Seal" class="logo">
     <h1>Philippine Navy — ANCHOR Hub</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="articles.html">Articles</a>
-      <a href="infographics.html">Infographics</a>
-      <a href="podcasts.html">Podcasts</a>
-      <a href="videos.html">Videos</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="about.html">About</a>
+      <a href="Index.html">Home</a>
+      <a href="Articles.html">Articles</a>
+      <a href="Infographics.html">Infographics</a>
+      <a href="Pod.html">Podcasts</a>
+      <a href="Videos.html">Videos</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="About.html">About</a>
     </nav>
   </header>
 
@@ -32,7 +32,7 @@
       <img src="assets/img/article1.jpg" alt="">
       <h4>Securing Our Seas from Propaganda</h4>
       <p>Learn how PN strengthens public trust amid information warfare.</p>
-      <a href="articles.html">Read More</a>
+      <a href="Articles.html">Read More</a>
     </div>
   </section>
 
