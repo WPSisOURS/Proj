@@ -1,264 +1,43 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ANCHOR — Philippine Navy Digital Hub (Prototype)</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    :root{--pn-blue:#002147;--pn-gold:#FFD700;--muted:#6b7280;--bg:#f5f6fa;--card:#ffffff}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1.5;color:#0f172a;background:var(--bg);margin:0}
-    .wrap{max-width:1100px;margin:20px auto;padding:0 16px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .logo{display:flex;gap:12px;align-items:center}
-    .logo img{width:48px;height:48px;border-radius:50%}
-    nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:600;cursor:pointer}
-    .hero{background:linear-gradient(90deg,var(--pn-blue),#07306b);border-radius:10px;padding:20px;color:white;display:flex;gap:20px;align-items:center}
-    .hero h1{margin:0;font-size:22px;color:var(--pn-gold)}
-    .btn{background:var(--pn-gold);color:var(--pn-blue);font-weight:600;padding:8px 12px;border-radius:8px;text-decoration:none;display:inline-block;cursor:pointer}
-    .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06);margin-top:14px}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-    .grid2{display:grid;grid-template-columns:2fr 1fr;gap:14px}
-    .small{font-size:13px;color:var(--muted)}
-    footer{margin:20px 0;padding:16px 0;color:var(--muted);text-align:center;border-top:2px solid var(--pn-blue)}
-    .hidden{display:none}
-    .article-title{color:var(--pn-blue);font-weight:700}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-    .infographic{width:100%;height:160px;object-fit:cover;border-radius:8px}
-    .video-thumb{width:100%;height:160px;object-fit:cover;border-radius:8px}
-    .audio-ep{display:flex;align-items:center;gap:12px;padding:8px 0}
-    /* responsive */
-    @media(max-width:900px){.grid3,.grid2{grid-template-columns:1fr}.hero{flex-direction:column;align-items:flex-start}}
-    textarea{width:100%;height:90px;padding:8px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit}
-    input[type=text],input[type=password]{width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px}
-    .label{font-weight:600;margin-bottom:6px}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PN ANCHOR Hub | Homepage</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Seal_of_the_Philippine_Navy.png" alt="PN Seal">
-        <div>
-          <div style="font-weight:800;color:var(--pn-blue)">Philippine Navy — ANCHOR Project</div>
-          <div class="small">Consolidated Digital Hub for Cognitive Warfare & Social Media Influence</div>
-        </div>
-      </div>
-      <nav>
-        <a onclick="navigate('home')">Home</a>
-        <a onclick="navigate('articles')">Articles</a>
-        <a onclick="navigate('infographics')">Infographics</a>
-        <a onclick="navigate('podcasts')">Podcasts</a>
-        <a onclick="navigate('videos')">Video Reels</a>
-        <a onclick="navigate('dashboard')">Dashboard</a>
-        <a onclick="navigate('about')">About</a>
-      </nav>
-    </header><!-- Pages (SPA) -->
-<main id="home">
-  <section class="hero card">
-    <div style="flex:1">
-      <h1>Anchored on Service — Defending the Information Domain</h1>
-      <p class="small">The consolidated digital hub centralizes PN narratives, publishes evidence-based articles, and amplifies maritime awareness across social platforms in line with ComPlan MULAT.</p>
-      <div style="margin-top:10px"><button class="btn" onclick="navigate('articles')">Read Latest Narratives</button></div>
-    </div>
-    <div style="width:320px">
-      <div class="card small">
-        <strong>Quick Snapshot</strong>
-        <div style="margin-top:8px"><div class="small">Monthly Reach</div><div style="font-weight:700;color:var(--pn-blue)">1.2M</div></div>
-        <div style="margin-top:8px"><div class="small">Active Alerts</div><div style="font-weight:700;color:#d03c3c">24</div></div>
-      </div>
+  <header>
+    <img src="assets/img/pn-logo.png" alt="PN Seal" class="logo">
+    <h1>Philippine Navy — ANCHOR Hub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="articles.html">Articles</a>
+      <a href="infographics.html">Infographics</a>
+      <a href="podcasts.html">Podcasts</a>
+      <a href="videos.html">Videos</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Countering Disinformation • Building Maritime Awareness</h2>
+    <p>Safeguarding the information environment with the Philippine Navy’s digital presence.</p>
+  </section>
+
+  <section class="featured">
+    <h3>Featured Narratives</h3>
+    <div class="card">
+      <img src="assets/img/article1.jpg" alt="">
+      <h4>Securing Our Seas from Propaganda</h4>
+      <p>Learn how PN strengthens public trust amid information warfare.</p>
+      <a href="articles.html">Read More</a>
     </div>
   </section>
 
-  <section class="card">
-    <h3 class="article-title">Featured Narrative</h3>
-    <div class="meta">September 10, 2025 — By PN Communications</div>
-    <p class="small">In response to recent online claims about fleet movements, the Philippine Navy reaffirms its commitment to lawful maritime operations and clarifies the facts surrounding patrol activities in the West Philippine Sea.</p>
-    <p><button class="btn" onclick="navigate('articles','article-1')">Read Full Article</button></p>
-  </section>
-
-  <section class="grid3">
-    <div class="card">
-      <h4 class="article-title">Community Outreach in Palawan</h4>
-      <div class="small">Sept 5, 2025</div>
-      <p class="small">PN medical missions and coastal awareness activities strengthened community ties and reporting networks.</p>
-    </div>
-    <div class="card">
-      <h4 class="article-title">#MaritimeFacts: Episode 3</h4>
-      <div class="small">Aug 28, 2025</div>
-      <p class="small">Infographic series debunks common myths about maritime boundaries.</p>
-    </div>
-    <div class="card">
-      <h4 class="article-title">Voices from the Fleet</h4>
-      <div class="small">Aug 15, 2025</div>
-      <p class="small">First-hand accounts from sailors on operational readiness and welfare.</p>
-    </div>
-  </section>
-</main>
-
-<!-- Articles List & Single Article -->
-<section id="articles" class="hidden">
-  <div class="card">
-    <h2 class="article-title">Articles & Narratives</h2>
-    <div class="small">Categories: Maritime Awareness • Fact Check • Community Stories • PN Operations</div>
-  </div>
-  <div class="grid3" style="margin-top:12px" id="article-list"></div>
-  <div id="article-view" class="card hidden" style="margin-top:12px"></div>
-</section>
-
-<!-- Infographics -->
-<section id="infographics" class="hidden">
-  <div class="card"><h2 class="article-title">Infographics Library</h2><div class="small">Downloadable visuals for sharing and community use.</div></div>
-  <div class="grid3" id="infographic-list"></div>
-</section>
-
-<!-- Podcasts -->
-<section id="podcasts" class="hidden">
-  <div class="card"><h2 class="article-title">Podcast Corner</h2><div class="small">Episodes featuring PN leaders, academe, and community voices.</div></div>
-  <div id="podcast-list"></div>
-</section>
-
-<!-- Videos -->
-<section id="videos" class="hidden">
-  <div class="card"><h2 class="article-title">Video Reels Gallery</h2><div class="small">Short-form videos optimized for social platforms.</div></div>
-  <div class="grid3" id="video-list"></div>
-</section>
-
-<!-- Dashboard (restricted) -->
-<section id="dashboard" class="hidden">
-  <div class="card">
-    <h2 class="article-title">Monitoring Dashboard (Operator Access)</h2>
-    <div class="small">Access level: Operators only — simulated login below.</div>
-    <div style="margin-top:10px;max-width:420px">
-      <div class="label">Username</div>
-      <input type="text" id="login-user" placeholder="operator">
-      <div class="label">Password</div>
-      <input type="password" id="login-pass" placeholder="••••••">
-      <div style="margin-top:8px"><button class="btn" onclick="login()">Login</button></div>
-    </div>
-  </div>
-
-  <div id="dashboard-panel" class="hidden" style="margin-top:12px">
-    <div class="grid2">
-      <div class="card">
-        <h4>Engagement Overview</h4>
-        <canvas id="engagementChart"></canvas>
-      </div>
-      <div class="card">
-        <h4>Sentiment Analysis</h4>
-        <canvas id="sentimentChart"></canvas>
-      </div>
-    </div>
-    <div class="grid2" style="margin-top:12px">
-      <div class="card"><h4>Top Influencers</h4><canvas id="influencerChart"></canvas></div>
-      <div class="card"><h4>Alerts Feed</h4><ul id="alerts"></ul></div>
-    </div>
-    <div class="card" style="margin-top:12px">
-      <h4>Command Console</h4>
-      <p class="small">Draft & trigger posts (simulation)</p>
-      <textarea id="console-input" placeholder="Type message..."></textarea>
-      <div style="margin-top:8px"><button class="btn" onclick="sendPost()">Send</button> <button class="btn" onclick="triggerCounter()">Trigger Counter</button></div>
-      <ul id="console-log" style="margin-top:8px"></ul>
-    </div>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about" class="hidden">
-  <div class="card">
-    <h2 class="article-title">About ANCHOR Project</h2>
-    <p class="small">Aligned with AFP ComPlan MULAT, ANCHOR is the PN’s consolidated digital hub for counter-hybrid online response. It centralizes narratives, publishes evidence-based content, and amplifies messages to inoculate the public against hostile propaganda.</p>
-  </div>
-</section>
-
-<footer>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Seal_of_the_Philippine_Navy.png" width="36" style="vertical-align:middle;margin-right:8px">Philippine Navy • Protecting Maritime Interests • Anchored on Service
-</footer>
-
-  </div>  <script>
-    /* ---------- Sample Content Data ---------- */
-    const ARTICLES = [
-      {id:'article-1',title:'PN Conducts Maritime Patrols in West Philippine Sea',date:'September 10, 2025',category:'PN Operations',excerpt:'Philippine Navy ships completed routine maritime patrols, reaffirming sovereignty and commitment to national waters.',body:'<p>The Philippine Navy conducted scheduled patrols to uphold maritime law...</p><p><strong>Facts:</strong> Patrols were routine, coordinated with local authorities.</p>'},
-      {id:'article-2',title:'Countering Disinformation: Facts on Naval Operations',date:'September 8, 2025',category:'Fact Check',excerpt:'Official PN statement clarifies false claims circulating online regarding fleet movements and readiness.',body:'<p>There have been circulating reports online that misrepresent PN operations...</p>'},
-      {id:'article-3',title:'Community Outreach in Palawan',date:'September 5, 2025',category:'Community Stories',excerpt:'PN personnel engage local communities through medical missions and information awareness campaigns.',body:'<p>Community engagement is central to our approach...</p>'}
-    ];
-
-    const INFOGRAPHICS = [
-      {id:'inf-1',title:'Maritime Facts: Boundaries Explained',img:'https://via.placeholder.com/600x360?text=Infographic+1'},
-      {id:'inf-2',title:'#MaritimeFacts: Verify Before You Share',img:'https://via.placeholder.com/600x360?text=Infographic+2'},
-      {id:'inf-3',title:'How to Report Suspicious Activity',img:'https://via.placeholder.com/600x360?text=Infographic+3'}
-    ];
-
-    const PODCASTS = [
-      {id:'pod-1',title:'Episode 1: Maritime Awareness 101',src:''},
-      {id:'pod-2',title:'Episode 2: The Role of Communities',src:''}
-    ];
-
-    const VIDEOS = [
-      {id:'vid-1',title:'Reel: PN Patrol Highlights',yt:'https://www.youtube.com/embed/dQw4w9WgXcQ'},
-      {id:'vid-2',title:'Reel: How to Verify Claims',yt:'https://www.youtube.com/embed/dQw4w9WgXcQ'},
-      {id:'vid-3',title:'Reel: Community Dialogues',yt:'https://www.youtube.com/embed/dQw4w9WgXcQ'}
-    ];
-
-    /* ---------- Navigation / Rendering ---------- */
-    function hideAll(){document.querySelectorAll('main, section').forEach(n=>n.classList.add('hidden'))}
-    function navigate(page,id){hideAll(); if(page==='home'){document.getElementById('home').classList.remove('hidden');window.scrollTo(0,0)}
-      else if(page==='articles'){document.getElementById('articles').classList.remove('hidden');renderArticleList();window.scrollTo(0,0)}
-      else if(page==='infographics'){document.getElementById('infographics').classList.remove('hidden');renderInfographics();window.scrollTo(0,0)}
-      else if(page==='podcasts'){document.getElementById('podcasts').classList.remove('hidden');renderPodcasts();window.scrollTo(0,0)}
-      else if(page==='videos'){document.getElementById('videos').classList.remove('hidden');renderVideos();window.scrollTo(0,0)}
-      else if(page==='dashboard'){document.getElementById('dashboard').classList.remove('hidden');window.scrollTo(0,0)}
-      else if(page==='about'){document.getElementById('about').classList.remove('hidden');window.scrollTo(0,0)}
-      if(id) renderArticle(id);
-    }
-
-    /* Article list */
-    function renderArticleList(){const el=document.getElementById('article-list');el.innerHTML='';ARTICLES.forEach(a=>{const card=document.createElement('div');card.className='card';card.innerHTML=`<h4 class="article-title">${a.title}</h4><div class="meta">${a.date} • ${a.category}</div><p class="small">${a.excerpt}</p><p><button class="btn" onclick="navigate('articles','${a.id}')">Read</button></p>`;el.appendChild(card)})}
-    function renderArticle(id){document.getElementById('article-view').classList.remove('hidden');const a=ARTICLES.find(x=>x.id===id);const view=document.getElementById('article-view');view.innerHTML=`<h3 class=\"article-title\">${a.title}</h3><div class=\"meta\">${a.date} • ${a.category}</div>${a.body}<p class=\"small\">Source: Philippine Navy Communications</p><p><button class=\"btn\" onclick=\"navigate('articles')\">Back to Articles</button></p>`}
-
-    /* Infographics */
-    function renderInfographics(){const el=document.getElementById('infographic-list');el.innerHTML='';INFOGRAPHICS.forEach(i=>{const card=document.createElement('div');card.className='card';card.innerHTML=`<img src="${i.img}" class="infographic"><h4 style=\"margin-top:8px;color:var(--pn-blue)\">${i.title}</h4><p class=\"small\">Download and share to help verify claims.</p><p><button class=\"btn\" onclick=\"alert('Download placeholder for ${i.id}')\">Download</button></p>`;el.appendChild(card)})}
-
-    /* Podcasts */
-    function renderPodcasts(){const el=document.getElementById('podcast-list');el.innerHTML='';PODCASTS.forEach(p=>{const box=document.createElement('div');box.className='card';box.innerHTML=`<div class=\"audio-ep\"><div><strong>${p.title}</strong><div class=\"small\">PN Podcast Series</div></div><audio controls style=\"width:100%;margin-top:8px\"><source src=\"\" type=\"audio/mpeg\">Your browser doesn't support audio.</audio></div>`;el.appendChild(box)})}
-
-    /* Videos */
-    function renderVideos(){const el=document.getElementById('video-list');el.innerHTML='';VIDEOS.forEach(v=>{const card=document.createElement('div');card.className='card';card.innerHTML=`<iframe width=\"100%\" height=\"160\" src=\"${v.yt}\" title=\"${v.title}\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe><h4 style=\"margin-top:8px;color:var(--pn-blue)\">${v.title}</h4>`;el.appendChild(card)})}
-
-    /* ---------- Dashboard (charts + console) ---------- */
-    let engChart,sentChart,infChart;
-    function initDashboard(){
-      const engagementCtx = document.getElementById('engagementChart').getContext('2d');
-      engChart = new Chart(engagementCtx, {type:'line',data:{labels:['T-7','T-6','T-5','T-4','T-3','T-2','T-1','Now'],datasets:[{label:'Engagements',data:[120,190,300,500,200,300,450,600],borderColor:'#FFD700',backgroundColor:'rgba(255,215,0,0.2)',tension:0.3,fill:true}]},options:{responsive:true,plugins:{legend:{display:false}}}});
-
-      const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
-      sentChart = new Chart(sentimentCtx, {type:'doughnut',data:{labels:['Positive','Neutral','Negative'],datasets:[{data:[65,25,10],backgroundColor:['#16a34a','#facc15','#dc2626']}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
-
-      const influencerCtx = document.getElementById('influencerChart').getContext('2d');
-      infChart = new Chart(influencerCtx, {type:'bar',data:{labels:['@NavalWatch','@SeaGuardian','@PHMaritime','@FleetVoice','@OceanShield'],datasets:[{label:'Reach (k)',data:[80,65,60,55,40],backgroundColor:'#002147'}]},options:{responsive:true,plugins:{legend:{display:false}}}});
-
-      // alerts
-      const alerts=document.getElementById('alerts');alerts.innerHTML='';
-      const sample=['⚠️ Viral misinfo flagged','📢 Counter post hit 50k','🚨 Bot network detected','✅ Community report validated'];
-      sample.forEach(s=>{const li=document.createElement('li');li.textContent=s;alerts.appendChild(li)});
-
-      // console log
-      document.getElementById('console-log').innerHTML='';
-    }
-
-    function login(){const u=document.getElementById('login-user').value;const p=document.getElementById('login-pass').value;if(u==='operator' && p==='password'){document.getElementById('dashboard-panel').classList.remove('hidden');initDashboard();addDashboardLog('🔐 Operator logged in');}else{alert('Invalid credentials (use operator/password for demo)')}}
-
-    function addDashboardLog(msg){const el=document.getElementById('console-log');const li=document.createElement('li');li.textContent=new Date().toLocaleTimeString()+ ' — ' + msg;el.prepend(li)}
-
-    function sendPost(){const txt=document.getElementById('console-input').value;if(!txt){alert('Type a message first');return;}addDashboardLog('📣 Post sent: '+txt);document.getElementById('console-input').value='';// simulate engagement bump
-      engChart.data.datasets[0].data.push(Math.floor(Math.random()*200)+100);engChart.data.labels.push('Now');engChart.update();}
-    function triggerCounter(){addDashboardLog('🚨 Counter-narrative triggered.'); // tweak sentiment
-      sentChart.data.datasets[0].data=[Math.max(70, sentChart.data.datasets[0].data[0]+5), Math.max(20, sentChart.data.datasets[0].data[1]-3), Math.max(5, sentChart.data.datasets[0].data[2]-2)];sentChart.update();}
-
-    function navigateToHomeOnLoad(){navigate('home');}
-    // init
-    document.addEventListener('DOMContentLoaded',()=>{navigateToHomeOnLoad();});
-  </script></body>
+  <footer>
+    <p>© 2025 Philippine Navy | Anchored on Service</p>
+  </footer>
+</body>
 </html>
