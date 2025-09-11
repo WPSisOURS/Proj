@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infographics | PN ANCHOR Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>Infographics Library</h1>
+</header>
+
+<section>
+  <div class="card">
+    <img src="assets/img/info1.png" alt="Myth vs Fact">
+    <p>Maritime Awareness: Myth vs Fact</p>
+    <a href="assets/img/info1.png" download>Download</a>
+  </div>
+</section>
+
+<footer>
+  <p>Philippine Navy | Anchored on Service</p>
+</footer>
+</body>
+</html>
