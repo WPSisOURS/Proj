@@ -161,3 +161,41 @@ function filterArticles() {
 
 articleSearch.addEventListener("input", filterArticles);
 articleFilter.addEventListener("change", filterArticles);
+}
+// Infographic Lightbox with Navigation
+let currentIndex = 0;
+const galleryItems = document.querySelectorAll(".grid-gallery img");
+
+function openLightbox(img) {
+  document.getElementById("lightbox").style.display = "block";
+  document.getElementById("lightboxImg").src = img.src;
+  document.getElementById("caption").innerHTML = img.alt;
+  currentIndex = Array.from(galleryItems).indexOf(img);
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+function changeSlide(n) {
+  currentIndex += n;
+  if (currentIndex >= galleryItems.length) currentIndex = 0;
+  if (currentIndex < 0) currentIndex = galleryItems.length - 1;
+  const img = galleryItems[currentIndex];
+  document.getElementById("lightboxImg").src = img.src;
+  document.getElementById("caption").innerHTML = img.alt;
+}
+// Keyboard Controls for Lightbox
+document.addEventListener("keydown", function(event) {
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox.style.display === "block") {
+    if (event.key === "ArrowLeft") {
+      changeSlide(-1);
+    } else if (event.key === "ArrowRight") {
+      changeSlide(1);
+    } else if (event.key === "Escape") {
+      closeLightbox();
+    }
+  }
+});
+
