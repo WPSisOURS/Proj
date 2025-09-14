@@ -169,6 +169,16 @@
     </div>
   </div>
 
+  <section class="ga-analytics">
+  <h2 class="section-title">Google Analytics Overview</h2>
+  <div class="analytics-card">
+    <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
+    <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
+    <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
+    <canvas id="gaTrendChart" width="300" height="120"></canvas>
+  </div>
+  </section>
+
   <script>
     /* Sentiment Chart */
     const ctx = document.getElementById('sentimentChart').getContext('2d');
@@ -269,13 +279,6 @@
       }
     });
   </script>
-  <section class="ga-analytics">
-  <h2 class="section-title">Google Analytics Overview</h2>
-  <div class="analytics-card">
-    <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
-    <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
-    <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
-  </div>
-  </section>
+  
 </body>
 </html>
