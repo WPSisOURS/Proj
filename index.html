@@ -3,41 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PN ANCHOR Hub | Homepage</title>
-  <link rel="stylesheet" href="Style.css">
+  <title>Philippine Navy Digital Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <img src="assets/img/pn-logo.png" alt="PN Seal" class="logo">
-    <h1>Philippine Navy — ANCHOR Hub</h1>
-    <nav>
-      <a href="index.html">Home</a>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="branding">
+      <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
+      <h1>Philippine Navy Digital Hub</h1>
+      <p class="tagline">Safeguarding the Information Domain | ComPlan MULAT</p>
+    </div>
+    <nav class="nav">
+      <a href="Index.html">Home</a>
       <a href="Articles.html">Articles</a>
-      <a href="Infographics.html">Infographics</a>
       <a href="Pod.html">Podcasts</a>
-      <a href="Videos.html">Videos</a>
+      <a href="Infographics.html">Infographics</a>
+      <a href="Videos.html">Video Reels</a>
       <a href="Dashboard.html">Dashboard</a>
-      <a href="About.html">About</a>
     </nav>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
-    <h2>Countering Disinformation • Building Maritime Awareness</h2>
-    <p>Safeguarding the information environment with the Philippine Navy’s digital presence.</p>
-  </section>
-
-  <section class="featured">
-    <h3>Featured Narratives</h3>
-    <div class="card">
-      <img src="assets/img/article1.jpg" alt="">
-      <h4>Securing Our Seas from Propaganda</h4>
-      <p>Learn how PN strengthens public trust amid information warfare.</p>
-      <a href="Articles.html">Read More</a>
+    <div class="hero-text">
+      <h2>Countering Misinformation. Building Maritime Awareness.</h2>
+      <p>Through narratives, podcasts, infographics, and real-time monitoring, the PN ensures a resilient information environment.</p>
+      <a href="Articles.html" class="btn">Explore Articles</a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hero-navy.jpg" alt="Philippine Navy at Sea">
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 Philippine Navy | Anchored on Service</p>
+  <!-- NAVIGATION CARDS -->
+  <section class="quick-links">
+    <h3>Explore Our Digital Hub</h3>
+    <div class="card-container">
+      <a href="Articles.html" class="card"><i class="fa-solid fa-newspaper"></i> Articles</a>
+      <a href="Pod.html" class="card"><i class="fa-solid fa-podcast"></i> Podcasts</a>
+      <a href="Infographics.html" class="card"><i class="fa-solid fa-chart-pie"></i> Infographics</a>
+      <a href="Videos.html" class="card"><i class="fa-solid fa-video"></i> Video Reels</a>
+      <a href="Dashboard.html" class="card"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+    </div>
+  </section>
+
+  <!-- FEATURED CONTENT -->
+  <section class="featured">
+    <h3>Featured Narratives</h3>
+    <div class="featured-container">
+      <article class="featured-item">
+        <img src="assets/article1.jpg" alt="Article Image">
+        <h4>Strengthening Maritime Security</h4>
+        <p>How the PN combats disinformation while ensuring freedom of navigation in the West Philippine Sea.</p>
+        <a href="Articles.html" class="read-more">Read More</a>
+      </article>
+      <article class="featured-item">
+        <img src="assets/article2.jpg" alt="Podcast Image">
+        <h4>Voices from the Fleet</h4>
+        <p>A podcast series amplifying the stories of sailors and their role in safeguarding the nation’s waters.</p>
+        <a href="Pod.html" class="read-more">Listen</a>
+      </article>
+      <article class="featured-item">
+        <img src="assets/article3.jpg" alt="Infographic Image">
+        <h4>Understanding Cognitive Warfare</h4>
+        <p>An infographic series explaining how misinformation spreads and how to counter it effectively.</p>
+        <a href="Infographics.html" class="read-more">View Infographic</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Philippine Navy | Cognitive Warfare and Social Media Influence Tool</p>
+    <p>In partnership with AFP | ComPlan MULAT</p>
   </footer>
 </body>
 </html>
