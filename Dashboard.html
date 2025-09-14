@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PN Digital Hub Dashboard</title>
-  <link rel="stylesheet" href="Style.css" />
+  <link rel="stylesheet" href="style.css" /> <!-- ✅ match exact filename -->
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -14,10 +16,8 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQJMYBDKX1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag("js", new Date());
-
-    // Replace with your GA Measurement ID (from Google Analytics)
     gtag("config", "G-SQJMYBDKX1");
   </script>
 </head>
@@ -37,7 +37,7 @@
     <a href="Dashboard.html" class="active">Dashboard</a>
   </nav>
 
-  <div class="container">
+  <main class="container">
     <!-- Sentiment Chart -->
     <div class="card">
       <h2>Sentiment Trend (Last 7 Days)</h2>
@@ -58,7 +58,7 @@
       <div id="map"></div>
       <button id="resetMapBtn">🔄 Reset Map</button>
     </div>
-  </div>
+  </main>
 
   <!-- Google Analytics Overview -->
   <section class="ga-analytics card">
@@ -74,6 +74,6 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <!-- External Script -->
-  <script src="script.js"></script>
+  <script src="script.js" defer></script> <!-- ✅ defer ensures DOM is ready -->
 </body>
 </html>
