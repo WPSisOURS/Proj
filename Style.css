@@ -1,4 +1,4 @@
-/* 🌊 Philippine Navy Digital Hub Styles - Mobile Friendly */
+/* 🌊 Philippine Navy Digital Hub Styles */
 
 /* Base Reset */
 * {
@@ -16,22 +16,15 @@ body {
 
 /* Header & Branding */
 .header {
-  background: #002147;
+  background: #002147; /* Navy Blue */
   color: #fff;
   padding: 1rem;
   text-align: center;
   border-bottom: 4px solid #ffd700;
 }
 
-.header .branding {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .header .branding .logo {
   height: 60px;
-  width: auto;
   margin-bottom: 0.5rem;
 }
 
@@ -50,249 +43,134 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 0.5rem;
   gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .nav a {
-  padding: 0.5rem 0.8rem;
   text-decoration: none;
   color: #ffd700;
   font-weight: bold;
-  font-size: 0.9rem;
-  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
   transition: 0.3s;
+  border-radius: 4px;
 }
 
-.nav a:hover, .nav a.active {
+.nav a.active, .nav a:hover {
   background-color: #ffd700;
   color: #002147;
 }
 
-/* Hero Section */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+/* Container & Cards */
+.container {
   padding: 1rem;
-}
-
-.hero-image img {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-  margin-top: 1rem;
-}
-
-.hero-text h2 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-}
-
-.hero-text p {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-.hero-text .btn {
-  background: #ffd700;
-  color: #002147;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.hero-text .btn:hover {
-  background: #e6c200;
-}
-
-/* Quick Links Cards */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.8rem;
-  padding: 1rem 0;
-  justify-items: center;
-}
-
-.card {
-  background: #002147;
-  color: #ffd700;
-  text-decoration: none;
-  padding: 1rem;
-  border-radius: 8px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  transition: 0.3s;
-}
-
-.card i {
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.card:hover {
-  background: #1a2a4f;
-}
-
-/* Featured Content */
-.featured-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  padding: 1rem;
 }
 
-.featured-item img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-}
-
-.featured-item h4 {
-  font-size: 1rem;
-  color: #002147;
-  margin-bottom: 0.3rem;
-}
-
-.featured-item p {
-  font-size: 0.85rem;
-  margin-bottom: 0.3rem;
-}
-
-.read-more {
-  font-size: 0.85rem;
-  color: #ffd700;
-  text-decoration: none;
-}
-
-.read-more:hover {
-  text-decoration: underline;
-}
-
-/* Articles / Podcasts / Infographics / Videos Grids */
-.article-list, .podcast-list, .grid-gallery, .video-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.article-card, .podcast-card, .video-item {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-  padding: 0.5rem;
-}
-
-.article-card img, .podcast-card img, .video-item iframe {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.article-card h3, .podcast-card h3, .video-item h4 {
-  font-size: 1rem;
-  margin: 0.3rem 0;
-  color: #002147;
-}
-
-.article-card p, .podcast-card p {
-  font-size: 0.85rem;
-  color: #444;
-}
-
-.article-card a, .podcast-card a {
-  font-size: 0.85rem;
-  color: #ffd700;
-  text-decoration: none;
-}
-
-.article-card a:hover, .podcast-card a:hover {
-  text-decoration: underline;
-}
-
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-}
-
-.lightbox-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 10px;
-}
-
-#caption {
-  text-align: center;
-  color: #fff;
-  margin: 10px;
-  font-size: 0.9rem;
-}
-
-.lightbox .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-/* Alerts */
-.feed {
-  max-height: 200px;
-  overflow-y: auto;
-  padding: 0.5rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-}
-
-.feed ul {
-  list-style: none;
-}
-
-.feed li {
-  margin-bottom: 0.5rem;
-  font-size: 0.85rem;
-}
-
-/* Sentiment Chart & GA Panel */
 .card {
   background: #fff;
   border-radius: 10px;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+/* Charts */
 canvas {
   width: 100% !important;
   height: auto !important;
 }
 
-/* GA Analytics */
+/* Live Alerts */
+.feed {
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.feed li {
+  list-style: none;
+  margin-bottom: 0.4rem;
+  padding: 0.3rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.alert-positive {
+  background: rgba(30,144,255,0.15);
+  color: #1e90ff;
+}
+
+.alert-neutral {
+  background: rgba(241,196,15,0.15);
+  color: #f1c40f;
+}
+
+.alert-negative {
+  background: rgba(231,76,60,0.15);
+  color: #e74c3c;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+/* Mini Map */
+#miniMap {
+  border-radius: 10px;
+  background: #e6e6e6;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-marker {
+  transition: transform 0.3s ease-in-out;
+}
+
+.map-marker:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.map-tooltip {
+  pointer-events: none;
+}
+
+/* Reset Map Button */
+#resetMapBtn {
+  background: #002147;
+  color: #ffd700;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#resetMapBtn:hover {
+  background: #1e90ff;
+  color: #fff;
+}
+
+/* Google Analytics Card */
 .ga-analytics {
-  padding: 1rem;
+  text-align: center;
 }
 
 .analytics-card {
-  padding: 0.8rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: inline-block;
+  min-width: 280px;
+}
+
+#gaTrendChart {
+  margin-top: 1rem;
 }
 
 /* Footer */
@@ -301,34 +179,20 @@ canvas {
   color: #fff;
   text-align: center;
   padding: 1rem;
-  font-size: 0.8rem;
-  border-top: 3px solid #ffd700;
   margin-top: 2rem;
+  font-size: 0.85rem;
+  border-top: 3px solid #ffd700;
 }
 
-/* Responsive Grid Adjustments */
-@media(min-width: 600px) {
-  .featured-container, .article-list, .podcast-list, .grid-gallery, .video-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Responsive */
+@media (min-width: 600px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media(min-width: 900px) {
-  .featured-container, .article-list, .podcast-list, .grid-gallery, .video-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .hero {
-    flex-direction: row;
-    text-align: left;
-  }
-
-  .hero-text {
-    flex: 1;
-    padding-right: 1rem;
-  }
-
-  .hero-image {
-    flex: 1;
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
