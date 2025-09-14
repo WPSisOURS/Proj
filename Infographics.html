@@ -3,37 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PN Infographics | Digital Hub</title>
+  <title>Infographics - PN Digital Hub</title>
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header class="header">
     <div class="branding">
       <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
       <h1>Philippine Navy Digital Hub</h1>
-      <p class="tagline">Information at a Glance</p>
+      <p class="tagline">Strengthening Maritime Awareness & Countering Disinformation</p>
     </div>
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="Articles.html">Articles</a>
       <a href="Pod.html">Podcasts</a>
       <a href="Infographics.html">Infographics</a>
-      <a href="Videos.html">Video Reels</a>
+      <a href="Videos.html">Videos</a>
       <a href="Dashboard.html">Dashboard</a>
     </nav>
   </header>
 
-  <section class="content-section">
-    <h2 class="section-title">Infographics</h2>
-    <div class="grid-gallery">
-      <div class="grid-item"><img src="assets/infographic1.png" alt=""></div>
-      <div class="grid-item"><img src="assets/infographic2.png" alt=""></div>
-      <div class="grid-item"><img src="assets/infographic3.png" alt=""></div>
-    </div>
-  </section>
+  <!-- Page Content -->
+  <main>
+    <section>
+      <h2 class="section-title">Infographics Gallery</h2>
+      <p style="text-align:center; margin: 0 2rem 2rem;">
+        Visual storytelling to promote maritime security awareness, naval operations, and counter-narratives.
+      </p>
+      
+        <div class="grid-gallery">
+  <img src="assets/infographic1.jpg" alt="Maritime Security Awareness" onclick="openLightbox(this)">
+  <img src="assets/infographic2.jpg" alt="Counter Disinformation" onclick="openLightbox(this)">
+  <img src="assets/infographic3.jpg" alt="Naval Exercises" onclick="openLightbox(this)">
+  <img src="assets/infographic4.jpg" alt="Community Partnership" onclick="openLightbox(this)">
+  <img src="assets/infographic5.jpg" alt="PN History" onclick="openLightbox(this)">
+  <img src="assets/infographic6.jpg" alt="Environmental Protection" onclick="openLightbox(this)">
+</div>
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightboxImg">
+  <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+  <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  <div id="caption"></div>
+</div>
+      </div>
+    </section>
+  </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Philippine Navy | Digital Hub</p>
+    <p>© 2025 Philippine Navy | ComPlan MULAT - Digital Hub Initiative</p>
   </footer>
+
 </body>
 </html>
