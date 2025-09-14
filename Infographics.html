@@ -19,36 +19,36 @@
       <a href="index.html">Home</a>
       <a href="Articles.html">Articles</a>
       <a href="Pod.html">Podcasts</a>
-      <a href="Infographics.html">Infographics</a>
+      <a href="Infographics.html" class="active">Infographics</a>
       <a href="Videos.html">Videos</a>
       <a href="Dashboard.html">Dashboard</a>
     </nav>
   </header>
 
-  <!-- Page Content -->
+  <!-- Main Content -->
   <main>
     <section>
       <h2 class="section-title">Infographics Gallery</h2>
       <p style="text-align:center; margin: 0 2rem 2rem;">
         Visual storytelling to promote maritime security awareness, naval operations, and counter-narratives.
       </p>
-      
-        <div class="grid-gallery">
-  <img src="assets/infographic1.jpg" alt="Maritime Security Awareness" onclick="openLightbox(this)">
-  <img src="assets/infographic2.jpg" alt="Counter Disinformation" onclick="openLightbox(this)">
-  <img src="assets/infographic3.jpg" alt="Naval Exercises" onclick="openLightbox(this)">
-  <img src="assets/infographic4.jpg" alt="Community Partnership" onclick="openLightbox(this)">
-  <img src="assets/infographic5.jpg" alt="PN History" onclick="openLightbox(this)">
-  <img src="assets/infographic6.jpg" alt="Environmental Protection" onclick="openLightbox(this)">
-</div>
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lightbox">
-  <span class="close" onclick="closeLightbox()">&times;</span>
-  <img class="lightbox-content" id="lightboxImg">
-  <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-  <a class="next" onclick="changeSlide(1)">&#10095;</a>
-  <div id="caption"></div>
-</div>
+
+      <div class="grid-gallery" id="infographicGallery">
+        <img src="assets/infographic1.jpg" alt="Maritime Security Awareness" data-index="0" onclick="openLightbox(this)">
+        <img src="assets/infographic2.jpg" alt="Counter Disinformation" data-index="1" onclick="openLightbox(this)">
+        <img src="assets/infographic3.jpg" alt="Naval Exercises" data-index="2" onclick="openLightbox(this)">
+        <img src="assets/infographic4.jpg" alt="Community Partnership" data-index="3" onclick="openLightbox(this)">
+        <img src="assets/infographic5.jpg" alt="PN History" data-index="4" onclick="openLightbox(this)">
+        <img src="assets/infographic6.jpg" alt="Environmental Protection" data-index="5" onclick="openLightbox(this)">
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <div id="caption"></div>
       </div>
     </section>
   </main>
@@ -57,6 +57,44 @@
   <footer class="footer">
     <p>© 2025 Philippine Navy | ComPlan MULAT - Digital Hub Initiative</p>
   </footer>
-<script src="script.js"></script>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    // Lightbox functionality
+    let currentSlide = 0;
+    const images = document.querySelectorAll('#infographicGallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const caption = document.getElementById('caption');
+
+    function openLightbox(img) {
+      currentSlide = parseInt(img.dataset.index);
+      lightbox.style.display = "block";
+      showSlide(currentSlide);
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+    }
+
+    function changeSlide(n) {
+      currentSlide += n;
+      if (currentSlide < 0) currentSlide = images.length - 1;
+      if (currentSlide >= images.length) currentSlide = 0;
+      showSlide(currentSlide);
+    }
+
+    function showSlide(index) {
+      const img = images[index];
+      lightboxImg.src = img.src;
+      caption.textContent = img.alt;
+    }
+
+    // Close on click outside image
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  </script>
 </body>
 </html>
