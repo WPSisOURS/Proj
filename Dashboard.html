@@ -3,29 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PN Operator Dashboard</title>
-  <link rel="stylesheet" href="Style.css">
+  <title>PN Digital Hub Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Chart.js for data visualization -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script defer src="js/script.js"></script>
+
+  <!-- Leaflet Map Library -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Google Analytics (replace G-XXXXXXX with your GA ID) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX'); 
+  </script>
+
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Monitoring Dashboard</h1>
-</header>
+  <header>
+    <h1>PN Monitoring & Analytics Dashboard</h1>
+    <p>ANCHOR Project – Cognitive Warfare & Social Media Influence Tool</p>
+  </header>
 
-<section>
-  <h2>Engagement Overview</h2>
-  <canvas id="engagementChart"></canvas>
+  <main>
+    <!-- Section 1: Social Media Monitoring Tool -->
+    <section class="card">
+      <h2>Social Media Monitoring Tool</h2>
+      <div class="monitoring">
+        <div class="feed">
+          <h3>Live Mentions & Keywords</h3>
+          <ul>
+            <li>🔥 "#WestPhilippineSea" spiking +45%</li>
+            <li>⚓ "Philippine Navy rescue ops" trending in Palawan</li>
+            <li>🚨 Disinfo detected: "Fake ship sinking story"</li>
+          </ul>
+        </div>
+        <div class="chart">
+          <canvas id="sentimentChart"></canvas>
+        </div>
+      </div>
+    </section>
 
-  <h2>Sentiment Analysis</h2>
-  <canvas id="sentimentChart"></canvas>
+    <!-- Section 2: Website Analytics -->
+    <section class="card">
+      <h2>Google Analytics – Website Traffic</h2>
+      <p>Integrated with Google Analytics to monitor visitor stats, session duration, top pages, and referrers.</p>
+      <ul>
+        <li>👥 Real-Time Users: <strong>Auto from GA</strong></li>
+        <li>🌍 Top Locations: <strong>Auto from GA</strong></li>
+        <li>📄 Popular Content: <strong>Articles, Infographics, Podcasts</strong></li>
+      </ul>
+      <small>(Log in to Google Analytics Dashboard for full data)</small>
+    </section>
 
-  <h2>Operator Console</h2>
-  <form id="consoleForm">
-    <input type="text" placeholder="Enter narrative message">
-    <button type="submit">Post</button>
-  </form>
-  <ul id="alerts"></ul>
-</section>
+    <!-- Section 3: Regional Sentiment Map -->
+    <section class="card">
+      <h2>Philippines Sentiment & Engagement Map</h2>
+      <p>Regional heatmap showing sentiment and engagement levels by location.</p>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <script>
+    // Sentiment chart mockup
+    const ctx = document.getElementById('sentimentChart');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Positive', 'Neutral', 'Negative'],
+        datasets: [{
+          data: [55, 25, 20],
+          backgroundColor: ['#1e90ff', '#f1c40f', '#e74c3c'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+
+    // Map setup
+    var map = L.map('map').setView([12.8797, 121.7740], 5); // Center Philippines
+
+    // Base layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Example sentiment data (mockup)
+    var regions = [
+      { name: "Metro Manila", coords: [14.5995, 120.9842], sentiment: "Positive" },
+      { name: "Palawan", coords: [9.8349, 118.7384], sentiment: "Neutral" },
+      { name: "Zambales", coords: [15.363, 119.9509], sentiment: "Negative" }
+    ];
+
+    // Plot markers with colors
+    regions.forEach(region => {
+      var color = region.sentiment === "Positive" ? "blue" :
+                  region.sentiment === "Neutral" ? "orange" : "red";
+      L.circleMarker(region.coords, {
+        radius: 10,
+        color: color,
+        fillOpacity: 0.7
+      }).addTo(map).bindPopup(`<b>${region.name}</b><br>Sentiment: ${region.sentiment}`);
+    });
+  </script>
 </body>
 </html>
