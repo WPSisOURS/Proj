@@ -17,6 +17,10 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <!-- Leaflet (Map) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <style>
     body {
       font-family: "Segoe UI", Tahoma, sans-serif;
@@ -33,9 +37,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    header img {
-      height: 45px;
-    }
+    header img { height: 45px; }
     nav {
       background: #01336e;
       display: flex;
@@ -49,15 +51,14 @@
       font-weight: 500;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #f1c40f;
-    }
+    nav a:hover { color: #f1c40f; }
     .container {
       padding: 20px;
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 20px;
     }
+    .full { grid-column: span 2; }
     .card {
       background: #fff;
       padding: 20px;
@@ -70,15 +71,8 @@
       color: #002147;
     }
     /* Live Alert Feed */
-    .feed {
-      height: 280px;
-      overflow-y: auto;
-    }
-    .feed ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+    .feed { height: 280px; overflow-y: auto; }
+    .feed ul { list-style: none; margin: 0; padding: 0; }
     .feed li {
       padding: 8px;
       margin-bottom: 6px;
@@ -90,17 +84,47 @@
       justify-content: space-between;
       align-items: center;
     }
-    .feed .timestamp {
-      font-size: 0.8em;
-      margin-left: 10px;
-      opacity: 0.8;
-    }
+    .feed .timestamp { font-size: 0.8em; margin-left: 10px; opacity: 0.8; }
     .alert-positive { background: rgba(30,144,255,0.9); }
     .alert-neutral { background: rgba(241,196,15,0.9); color: #222; }
     .alert-negative { background: rgba(231,76,60,0.9); }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    /* Map */
+    #map {
+      width: 100%;
+      height: 400px;
+      border-radius: 10px;
+    }
+    /* Reset Button */
+    #resetMapBtn {
+      position: absolute;
+      top: 100px;
+      right: 30px;
+      background: #002147;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 1000;
+    }
+    #resetMapBtn:hover {
+      background: #013d84;
+      transform: scale(1.05);
+    }
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 33, 71, 0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(0, 33, 71, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 33, 71, 0); }
     }
   </style>
 </head>
@@ -125,7 +149,7 @@
   </nav>
 
   <div class="container">
-    <!-- Sentiment Analysis Chart -->
+    <!-- Sentiment Chart -->
     <div class="card">
       <h2>Sentiment Trend (Last 7 Days)</h2>
       <canvas id="sentimentChart" height="150"></canvas>
@@ -134,100 +158,116 @@
     <!-- Live Alerts -->
     <div class="card">
       <h2>Live Alerts Feed</h2>
-      <div class="feed">
-        <ul id="alertList"></ul>
-      </div>
+      <div class="feed"><ul id="alertList"></ul></div>
+    </div>
+
+    <!-- Map -->
+    <div class="card full">
+      <h2>Regional Sentiment & Maritime Activity Map</h2>
+      <div id="map"></div>
+      <button id="resetMapBtn">🔄 Reset Map</button>
     </div>
   </div>
 
   <script>
-    /* Sentiment Trend Chart */
+    /* Sentiment Chart */
     const ctx = document.getElementById('sentimentChart').getContext('2d');
     const sentimentChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
         datasets: [
-          {
-            label: "Positive",
-            data: [20, 35, 40, 38, 50, 65, 70],
-            borderColor: "#1e90ff",
-            backgroundColor: "rgba(30,144,255,0.2)",
-            fill: true,
-            tension: 0.4
-          },
-          {
-            label: "Neutral",
-            data: [40, 38, 35, 30, 28, 25, 20],
-            borderColor: "#f1c40f",
-            backgroundColor: "rgba(241,196,15,0.2)",
-            fill: true,
-            tension: 0.4
-          },
-          {
-            label: "Negative",
-            data: [10, 12, 15, 20, 25, 30, 28],
-            borderColor: "#e74c3c",
-            backgroundColor: "rgba(231,76,60,0.2)",
-            fill: true,
-            tension: 0.4
-          }
+          { label:"Positive", data:[20,35,40,38,50,65,70], borderColor:"#1e90ff", backgroundColor:"rgba(30,144,255,0.2)", fill:true, tension:0.4 },
+          { label:"Neutral", data:[40,38,35,30,28,25,20], borderColor:"#f1c40f", backgroundColor:"rgba(241,196,15,0.2)", fill:true, tension:0.4 },
+          { label:"Negative", data:[10,12,15,20,25,30,28], borderColor:"#e74c3c", backgroundColor:"rgba(231,76,60,0.2)", fill:true, tension:0.4 }
         ]
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "bottom" }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
+      options: { responsive:true, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ beginAtZero:true } } }
     });
 
-    /* Live Alerts */
+    /* Alerts & Sync with Map */
     const alerts = [
-      { text: "⚠️ Disinfo detected: Fake ship sinking story circulating.", type: "negative" },
-      { text: "🔥 #WestPhilippineSea trending +45% (positive narratives).", type: "positive" },
-      { text: "⚓ PN rescue op video gaining traction in Palawan.", type: "positive" },
-      { text: "🚨 Bot network identified spreading anti-AFP propaganda.", type: "negative" },
-      { text: "✅ PN humanitarian mission post shared 2,300 times.", type: "positive" },
-      { text: "🛰 Satellite imagery report debunked propaganda clip.", type: "neutral" }
+      { text: "⚠️ Fake ship sinking story detected.", type: "negative", coords:[14.5995, 120.9842] },
+      { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", coords:[9.7489, 118.7501] },
+      { text: "⚓ PN rescue op video viral in Palawan.", type: "positive", coords:[9.8500, 118.7500] },
+      { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", coords:[7.1907, 125.4553] },
+      { text: "✅ PN humanitarian mission shared widely.", type: "positive", coords:[10.3157, 123.8854] },
+      { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", coords:[18.1950, 120.5930] }
     ];
-
     let index = 0;
     const alertList = document.getElementById("alertList");
 
-    function getTime() {
-      const now = new Date();
-      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+
+    /* Map */
+    const map = L.map('map').setView([12.8797, 121.7740], 5); // Philippines
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const markers = { positive:[], neutral:[], negative:[] };
+
+    const sentimentIcons = {
+      positive: new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+      }),
+      neutral: new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+      }),
+      negative: new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+      })
+    };
+
+    function addMarker(alert){
+      const marker = L.marker(alert.coords, { icon: sentimentIcons[alert.type] })
+        .addTo(map)
+        .bindPopup(alert.text)
+        .openPopup();
+      markers[alert.type].push(marker);
+
+      // Flash effect
+      marker._icon.style.transition="transform 0.3s ease-in-out";
+      marker._icon.style.transform="scale(1.5)";
+      setTimeout(()=>{ marker._icon.style.transform="scale(1)"; },600);
+
+      // Auto zoom
+      map.setView(alert.coords, 7, { animate:true });
     }
 
-    function updateAlerts() {
+    /* Update alerts + sync */
+    function updateAlerts(){
       let current = alerts[index];
       let li = document.createElement("li");
       li.classList.add(`alert-${current.type}`);
-
-      let msg = document.createElement("span");
-      msg.textContent = current.text;
-
-      let time = document.createElement("span");
-      time.classList.add("timestamp");
-      time.textContent = getTime();
-
-      li.appendChild(msg);
-      li.appendChild(time);
+      li.innerHTML = `<span>${current.text}</span><span class="timestamp">${getTime()}</span>`;
       alertList.prepend(li);
+      if(alertList.children.length>10){ alertList.removeChild(alertList.lastChild); }
 
-      if (alertList.children.length > 10) {
-        alertList.removeChild(alertList.lastChild);
-      }
+      // Update map
+      addMarker(current);
 
-      index = (index + 1) % alerts.length;
+      index=(index+1)%alerts.length;
     }
+    updateAlerts(); setInterval(updateAlerts,4000);
 
-    updateAlerts();
-    setInterval(updateAlerts, 4000);
+    /* Reset Map */
+    document.getElementById('resetMapBtn').addEventListener('click', () => {
+      map.setView([12.8797, 121.7740], 5, { animate:true });
+    });
+    map.on('moveend zoomend', () => {
+      if (map.getZoom() > 5) {
+        document.getElementById('resetMapBtn').classList.add('pulse');
+      } else {
+        document.getElementById('resetMapBtn').classList.remove('pulse');
+      }
+    });
   </script>
 </body>
 </html>
