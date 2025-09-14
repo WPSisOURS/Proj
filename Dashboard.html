@@ -8,34 +8,32 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header">
     <div class="branding">
       <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
       <h1>Philippine Navy Digital Hub</h1>
-      <p class="tagline">Monitoring & Awareness Dashboard</p>
+      <p class="tagline">Safeguarding the Information Domain</p>
     </div>
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="Articles.html">Articles</a>
-      <a href="Infographics.html">Infographics</a>
       <a href="Pod.html">Podcasts</a>
+      <a href="Infographics.html">Infographics</a>
       <a href="Videos.html">Video Reels</a>
       <a href="Dashboard.html" class="active">Dashboard</a>
     </nav>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="container">
+  <div class="container">
     <!-- Sentiment Chart -->
     <div class="card">
       <h2>Sentiment Trend (Last 7 Days)</h2>
       <canvas id="sentimentChart" height="150"></canvas>
     </div>
 
-    <!-- Live Alerts Feed -->
+    <!-- Live Alerts -->
     <div class="card">
-      <h2>Live Alerts</h2>
+      <h2>Live Alerts Feed</h2>
       <div class="feed">
         <ul id="alertList" role="log" aria-live="polite"></ul>
       </div>
@@ -44,9 +42,7 @@
     <!-- Mini Map -->
     <div class="card">
       <h2>Regional Sentiment & Activity Map</h2>
-      <div id="map" style="width:100%; height:250px; border-radius:10px; background:#e6e6e6; display:flex; align-items:center; justify-content:center; color:#666;">
-        Map Placeholder
-      </div>
+      <div id="miniMap" style="position:relative; width:100%; height:250px; border-radius:10px; background:#e6e6e6; overflow:hidden;"></div>
       <button id="resetMapBtn" style="margin-top:0.5rem; padding:0.3rem 0.6rem; font-size:0.85rem;">🔄 Reset Map</button>
     </div>
 
@@ -54,20 +50,14 @@
     <section class="ga-analytics card">
       <h2 class="section-title">Google Analytics Overview</h2>
       <div class="analytics-card">
-        <p><strong>Real-time Users:</strong> <span id="gaUsers">0</span></p>
-        <p><strong>Top Active Page:</strong> <span id="gaPage">-</span></p>
-        <p><strong>Bounce Rate:</strong> <span id="gaBounce">0%</span></p>
+        <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
+        <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
+        <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
         <canvas id="gaTrendChart" width="300" height="120"></canvas>
       </div>
     </section>
-  </main>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>&copy; 2025 Philippine Navy | Digital Hub</p>
-  </footer>
-
-  <!-- SCRIPTS -->
   <script>
     // Sentiment Chart
     const ctx = document.getElementById('sentimentChart').getContext('2d');
@@ -84,64 +74,80 @@
       options: { responsive:true, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ beginAtZero:true } } }
     });
 
-    // Live Alerts
+    // Live alerts & map
     const alerts = [
-      { text: "⚠️ Fake ship sinking story detected.", type: "negative" },
-      { text: "🔥 #WestPhilippineSea trending positively.", type: "positive" },
-      { text: "⚓ PN rescue operation viral video.", type: "positive" },
-      { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative" },
-      { text: "✅ PN humanitarian mission widely shared.", type: "positive" },
-      { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral" }
+      { text: "⚠️ Fake ship sinking story detected.", type: "negative", x:0.6, y:0.3 },
+      { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", x:0.4, y:0.5 },
+      { text: "⚓ PN rescue operation viral video.", type: "positive", x:0.5, y:0.6 },
+      { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", x:0.7, y:0.7 },
+      { text: "✅ PN humanitarian mission widely shared.", type: "positive", x:0.3, y:0.4 },
+      { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", x:0.5, y:0.2 }
     ];
-
     let index = 0;
     const alertList = document.getElementById("alertList");
+    const miniMap = document.getElementById('miniMap');
 
     function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+
+    function createMarker(alert){
+      const marker = document.createElement('div');
+      marker.classList.add('map-marker', alert.type);
+      marker.title = alert.text;
+      marker.style.position = 'absolute';
+      marker.style.width = '12px';
+      marker.style.height = '12px';
+      marker.style.borderRadius = '50%';
+      marker.style.cursor = 'pointer';
+      marker.style.transform = 'translate(-50%, -50%)';
+      marker.style.background = alert.type === 'positive' ? '#1e90ff' : alert.type === 'neutral' ? '#f1c40f' : '#e74c3c';
+      marker.style.left = (alert.x*100) + '%';
+      marker.style.top = (alert.y*100) + '%';
+      miniMap.appendChild(marker);
+
+      marker.addEventListener('mouseenter', ()=>{ 
+        const tooltip = document.createElement('div');
+        tooltip.className = 'map-tooltip';
+        tooltip.innerText = alert.text;
+        tooltip.style.position = 'absolute';
+        tooltip.style.background = '#fff';
+        tooltip.style.padding = '4px 6px';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
+        tooltip.style.top = (alert.y*100 - 5) + '%';
+        tooltip.style.left = (alert.x*100 + 2) + '%';
+        tooltip.style.fontSize = '0.75rem';
+        tooltip.style.zIndex = 10;
+        miniMap.appendChild(tooltip);
+        marker._tooltip = tooltip;
+      });
+      marker.addEventListener('mouseleave', ()=>{ 
+        if(marker._tooltip) miniMap.removeChild(marker._tooltip);
+      });
+    }
 
     function updateAlerts(){
       const current = alerts[index];
       const li = document.createElement("li");
       li.classList.add(`alert-${current.type}`);
-      li.innerHTML = `<span>${current.text}</span> <span style="float:right;font-size:0.75rem;">${getTime()}</span>`;
+      li.innerHTML = `<span>${current.text}</span><span class="timestamp">${getTime()}</span>`;
       alertList.prepend(li);
-      if(alertList.children.length>6){ alertList.removeChild(alertList.lastChild); }
+      if(alertList.children.length>10) alertList.removeChild(alertList.lastChild);
+
+      createMarker(current);
       index=(index+1)%alerts.length;
     }
-    updateAlerts();
+
+    updateAlerts(); 
     setInterval(updateAlerts, 4000);
 
-    // Google Analytics Demo (Dynamic Panel)
-    const gaUsers = document.getElementById("gaUsers");
-    const gaPage = document.getElementById("gaPage");
-    const gaBounce = document.getElementById("gaBounce");
-
-    const pages = ["Articles.html","Dashboard.html","Pod.html","Infographics.html","Videos.html"];
-    function updateGA(){
-      gaUsers.textContent = Math.floor(Math.random()*50 + 1);
-      gaPage.textContent = pages[Math.floor(Math.random()*pages.length)];
-      gaBounce.textContent = (Math.random()*30 + 30).toFixed(1) + "%";
-    }
-    updateGA();
-    setInterval(updateGA, 5000);
-
-    // GA Trend Chart
-    const gaCtx = document.getElementById('gaTrendChart').getContext('2d');
-    const gaChart = new Chart(gaCtx, {
-      type: 'line',
-      data: {
-        labels: ["0 min","5 min","10 min","15 min","20 min","25 min","30 min"],
-        datasets: [{
-          label: "Users Over Time",
-          data: Array.from({length:7},()=>Math.floor(Math.random()*50 + 1)),
-          borderColor: "#1e90ff",
-          backgroundColor:"rgba(30,144,255,0.2)",
-          fill:true,
-          tension:0.4
-        }]
-      },
-      options: { responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
+    document.getElementById('resetMapBtn').addEventListener('click', ()=>{
+      miniMap.innerHTML = '';
+      alerts.forEach(createMarker);
     });
+
+    // Initialize map markers
+    alerts.forEach(createMarker);
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
