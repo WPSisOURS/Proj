@@ -1,4 +1,4 @@
-/* Sentiment Chart */
+/* ------------------ Sentiment Chart ------------------ */
 const ctx = document.getElementById('sentimentChart').getContext('2d');
 const sentimentChart = new Chart(ctx, {
   type: 'line',
@@ -13,78 +13,84 @@ const sentimentChart = new Chart(ctx, {
   options: { responsive:true, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ beginAtZero:true } } }
 });
 
-/* Google Maps with Alerts */
-const map = new google.maps.Map(document.getElementById("map"), {
-  zoom: 5,
-  center: { lat: 12.8797, lng: 121.7740 }
-});
-
+/* ------------------ Live Alerts ------------------ */
 const alerts = [
-  { text: "⚠️ Fake ship sinking story detected.", type: "negative", coords: {lat:14.5995, lng:120.9842} },
-  { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", coords: {lat:9.7489, lng:118.7501} },
-  { text: "⚓ PN rescue op video viral in Palawan.", type: "positive", coords: {lat:9.8500, lng:118.7500} },
-  { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", coords: {lat:7.1907, lng:125.4553} },
-  { text: "✅ PN humanitarian mission shared widely.", type: "positive", coords: {lat:10.3157, lng:123.8854} },
-  { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", coords: {lat:18.1950, lng:120.5930} }
+  { text: "⚠️ Fake ship sinking story detected.", type: "negative", coords:[14.5995, 120.9842] },
+  { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", coords:[9.7489, 118.7501] },
+  { text: "⚓ PN rescue op video viral in Palawan.", type: "positive", coords:[9.8500, 118.7500] },
+  { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", coords:[7.1907, 125.4553] },
+  { text: "✅ PN humanitarian mission shared widely.", type: "positive", coords:[10.3157, 123.8854] },
+  { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", coords:[18.1950, 120.5930] }
 ];
-
 let index = 0;
 const alertList = document.getElementById("alertList");
 
-function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+/* ------------------ Mini Map ------------------ */
+const mapCanvas = document.getElementById('mapCanvas');
+const mapCtx = mapCanvas.getContext('2d');
+function drawMap() {
+  mapCtx.fillStyle = "#d9eaf7";
+  mapCtx.fillRect(0,0,mapCanvas.width,mapCanvas.height);
+  mapCtx.fillStyle = "#002147";
+  mapCtx.font = "14px Arial";
+  mapCtx.fillText("Philippine Map (Mini)", 10, 20);
+}
+drawMap();
 
-const markers = [];
-
+/* ------------------ Add Marker ------------------ */
 function addMarker(alert){
-  const iconUrl = alert.type === "positive" ? "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                : alert.type === "neutral" ? "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
-                : "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
-
-  const marker = new google.maps.Marker({
-    position: alert.coords,
-    map: map,
-    title: alert.text,
-    icon: iconUrl
-  });
-
-  const infoWindow = new google.maps.InfoWindow({ content: alert.text });
-  marker.addListener("click", () => infoWindow.open(map, marker));
-  markers.push(marker);
-
-  map.panTo(alert.coords);
-  map.setZoom(7);
+  const x = Math.random() * (mapCanvas.width - 40) + 20;
+  const y = Math.random() * (mapCanvas.height - 40) + 40;
+  mapCtx.beginPath();
+  if(alert.type==="positive") mapCtx.fillStyle = "#1e90ff";
+  else if(alert.type==="neutral") mapCtx.fillStyle = "#f1c40f";
+  else mapCtx.fillStyle = "#e74c3c";
+  mapCtx.arc(x,y,8,0,2*Math.PI);
+  mapCtx.fill();
+  mapCtx.font="10px Arial";
+  mapCtx.fillText(alert.text.substring(0,20)+"...", x+10, y+4);
 }
 
-/* Update alerts + map */
+/* ------------------ Update Alerts + Map ------------------ */
+function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
 function updateAlerts(){
-  let current = alerts[index];
+  const current = alerts[index];
   const li = document.createElement("li");
   li.classList.add(`alert-${current.type}`);
   li.innerHTML = `<span>${current.text}</span> <span class="timestamp">${getTime()}</span>`;
   alertList.prepend(li);
-  if(alertList.children.length > 10) alertList.removeChild(alertList.lastChild);
+  if(alertList.children.length>10) alertList.removeChild(alertList.lastChild);
 
   addMarker(current);
 
-  index = (index+1) % alerts.length;
+  index = (index+1)%alerts.length;
 }
-
 updateAlerts();
 setInterval(updateAlerts, 4000);
 
-/* Reset Map */
-document.getElementById('resetMapBtn').addEventListener('click', ()=>{
-  map.setCenter({ lat:12.8797, lng:121.7740 });
-  map.setZoom(5);
-});
+/* ------------------ Google Analytics Mock ------------------ */
+function updateGA(){
+  document.getElementById('gaUsers').innerText = Math.floor(Math.random()*50)+1;
+  const pages = ["Articles.html","Pod.html","Infographics.html","Videos.html"];
+  document.getElementById('gaPage').innerText = pages[Math.floor(Math.random()*pages.length)];
+  document.getElementById('gaBounce').innerText = (Math.random()*50+10).toFixed(1)+"%";
 
-/* Google Analytics Mock Trend Chart */
-const gaCtx = document.getElementById("gaTrendChart").getContext("2d");
-const gaChart = new Chart(gaCtx, {
-  type: 'line',
-  data: {
-    labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
-    datasets: [{ label:"Users", data:[50,60,55,70,65,80,90], borderColor:"#1e90ff", fill:false }]
-  },
-  options:{ responsive:true, plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true } } }
-});
+  const ctxGA = document.getElementById('gaTrendChart').getContext('2d');
+  new Chart(ctxGA, {
+    type:'line',
+    data:{
+      labels:["6 AM","9 AM","12 PM","3 PM","6 PM","9 PM"],
+      datasets:[{
+        label:"Active Users",
+        data:Array.from({length:6},()=>Math.floor(Math.random()*50)+1),
+        borderColor:"#002147",
+        backgroundColor:"rgba(0,33,71,0.2)",
+        fill:true,
+        tension:0.3
+      }]
+    },
+    options:{ responsive:true, plugins:{ legend:{ display:false } } }
+  });
+}
+updateGA();
+setInterval(updateGA, 60000); // update every 1 min
