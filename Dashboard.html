@@ -5,14 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PN Digital Hub Dashboard</title>
   <link rel="stylesheet" href="Style.css" />
-  
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- ✅ Google Analytics Tag -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQJMYBDKX1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,80 +19,71 @@
   </script>
 </head>
 <body>
-  <header>
-    <h1>Philippine Navy Digital Hub</h1>
-    <div>Powered by PN Digital Hub</div>
-  </header>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="Articles.html">Articles</a>
-    <a href="Infographics.html">Infographics</a>
-    <a href="Pod.html">Podcasts</a>
-    <a href="Videos.html">Video Reels</a>
-    <a href="Dashboard.html" class="active">Dashboard</a>
-  </nav>
+<header>
+  <h1>Philippine Navy Digital Hub</h1>
+  <div>Powered by PN Digital Hub</div>
+</header>
 
-  <div class="container">
-    <!-- Sentiment Chart -->
-    <div class="card">
-      <h2>Sentiment Trend (Last 7 Days)</h2>
-      <canvas id="sentimentChart" height="150"></canvas>
-    </div>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="Articles.html">Articles</a>
+  <a href="Infographics.html">Infographics</a>
+  <a href="Pod.html">Podcasts</a>
+  <a href="Videos.html">Video Reels</a>
+  <a href="Dashboard.html" class="active">Dashboard</a>
+</nav>
 
-    <!-- Live Alerts -->
-    <div class="card">
-      <h2>Live Alerts Feed</h2>
-      <div class="feed">
-        <ul id="alertList" role="log" aria-live="polite"></ul>
-      </div>
-    </div>
+<div class="container">
+  <!-- Sentiment Chart -->
+  <div class="card">
+    <h2>Sentiment Trend (Last 7 Days)</h2>
+    <canvas id="sentimentChart"></canvas>
+  </div>
 
-    <!-- Map -->
-    <div class="card full">
-      <h2>Regional Sentiment & Maritime Activity Map</h2>
-      <div id="map"></div>
-      <button id="resetMapBtn">🔄 Reset Map</button>
+  <!-- Live Alerts -->
+  <div class="card">
+    <h2>Live Alerts Feed</h2>
+    <div class="feed">
+      <ul id="alertList" role="log" aria-live="polite"></ul>
     </div>
   </div>
 
-  <!-- Google Analytics Overview -->
-  <h2 class="section-title">Google Analytics Overview</h2>
-  <section class="ga-analytics">
-    <!-- Real-time Users -->
-    <div class="analytics-card">
-      <h3>👥 Real-time Users</h3>
-      <p id="gaUsers">Loading...</p>
-    </div>
+  <!-- Map -->
+  <div class="card full">
+    <h2>Regional Sentiment & Maritime Activity Map</h2>
+    <div id="map" style="width:100%; height:300px;"></div>
+    <button id="resetMapBtn">🔄 Reset Map</button>
+  </div>
+</div>
 
-    <!-- Top Active Page -->
-    <div class="analytics-card">
-      <h3>📄 Top Active Page</h3>
-      <p id="gaPage">Loading...</p>
-    </div>
+<h2 class="section-title">Google Analytics Overview</h2>
+<section class="ga-analytics">
+  <div class="analytics-card">
+    <h3>👥 Real-time Users</h3>
+    <p id="gaUsers">0</p>
+  </div>
+  <div class="analytics-card">
+    <h3>📄 Top Active Page</h3>
+    <p id="gaPage">/index.html</p>
+  </div>
+  <div class="analytics-card">
+    <h3>↩️ Bounce Rate</h3>
+    <p id="gaBounce">32%</p>
+  </div>
+  <div class="analytics-card">
+    <h3>📈 User Trend (7 Days)</h3>
+    <canvas id="gaTrendChart"></canvas>
+  </div>
+</section>
 
-    <!-- Bounce Rate -->
-    <div class="analytics-card">
-      <h3>↩️ Bounce Rate</h3>
-      <p id="gaBounce">Loading...</p>
-    </div>
+<footer>
+  <p>© 2025 Philippine Navy Digital Hub. All Rights Reserved.</p>
+</footer>
 
-    <!-- Trend Chart -->
-    <div class="analytics-card">
-      <h3>📈 User Trend (7 Days)</h3>
-      <canvas id="gaTrendChart"></canvas>
-    </div>
-  </section>
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
 
-  <footer>
-    <p>© 2025 Philippine Navy Digital Hub. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- External Script -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
