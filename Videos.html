@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header class="header">
     <div class="branding">
       <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
@@ -18,28 +20,45 @@
       <a href="Articles.html">Articles</a>
       <a href="Pod.html">Podcasts</a>
       <a href="Infographics.html">Infographics</a>
-      <a href="Videos.html">Video Reels</a>
+      <a href="Videos.html" class="active">Video Reels</a>
       <a href="Dashboard.html">Dashboard</a>
     </nav>
   </header>
 
-  <section class="content-section">
-    <h2 class="section-title">Video Reels</h2>
-    <div class="video-grid">
-      <div class="video-item">
-        <iframe width="100%" height="200" src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
-        <h4>Naval Exercise Highlights</h4>
-      </div>
-      <div class="video-item">
-        <iframe width="100%" height="200" src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
-        <h4>Fleet Operations Documentary</h4>
-      </div>
-    </div>
-  </section>
+  <!-- Video Reels Section -->
+  <main>
+    <section class="content-section">
+      <h2 class="section-title">Video Reels</h2>
+      <div class="video-grid">
+        <article class="video-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <h4>Naval Exercise Highlights</h4>
+        </article>
 
+        <article class="video-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <h4>Fleet Operations Documentary</h4>
+        </article>
+
+        <article class="video-item">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/example3" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <h4>Community Engagement Highlights</h4>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Philippine Navy | Digital Hub</p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
