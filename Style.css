@@ -12,152 +12,168 @@ body {
   background: #f4f6fa;
   color: #1a1a1a;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* Header & Branding */
+/* Header */
 header {
   background: #002147; /* Navy Blue */
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 1rem;
   text-align: center;
-  border-bottom: 5px solid #ffd700; /* Gold accent */
+  border-bottom: 4px solid #ffd700; /* Gold accent */
 }
 
 header h1 {
   font-size: 1.8rem;
-  margin-bottom: 0.2rem;
 }
 
 header div {
   font-size: 0.9rem;
-  color: #ddd;
+  color: #ffd700;
 }
 
 /* Navigation */
 nav {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  background: #001530;
-  padding: 0.6rem;
+  flex-wrap: wrap;
+  background: #001d3d;
+  padding: 0.5rem;
 }
 
 nav a {
+  margin: 0.3rem 0.8rem;
+  padding: 0.4rem 0.8rem;
   color: #ffd700;
   text-decoration: none;
   font-weight: bold;
+  border-radius: 4px;
   transition: 0.3s;
 }
 
-nav a:hover {
-  color: #fff;
+nav a:hover, nav a.active {
+  background: #ffd700;
+  color: #001d3d;
 }
 
-nav .active {
-  text-decoration: underline;
-  color: #fff;
-}
-
-/* Container Layout */
+/* Container */
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
 }
 
+/* Cards */
 .card {
   background: #fff;
-  padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.card h2 {
-  margin-bottom: 1rem;
-  color: #002147;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .card.full {
-  grid-column: 1 / -1;
+  width: 100%;
 }
 
-/* Live Alerts */
+/* Sentiment Chart Canvas */
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Live Alerts Feed */
 .feed {
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+}
+
+.feed ul {
+  list-style: none;
+}
+
+.feed li {
   padding: 0.5rem;
-  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.alert-positive { background: rgba(30,144,255,0.05); }
+.alert-neutral { background: rgba(241,196,15,0.05); }
+.alert-negative { background: rgba(231,76,60,0.05); }
+
+.timestamp {
+  font-size: 0.8rem;
+  color: #555;
 }
 
 /* Map */
 #map {
-  width: 100%;
-  height: 400px;
   border-radius: 10px;
-  margin-top: 1rem;
+  width: 100%;
+  height: 300px;
+  margin-top: 0.5rem;
 }
 
+/* Reset Map Button */
 #resetMapBtn {
-  margin-top: 0.8rem;
-  padding: 0.6rem 1.2rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
   background: #002147;
-  color: #fff;
+  color: #ffd700;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
   transition: 0.3s;
 }
 
 #resetMapBtn:hover {
-  background: #004080;
+  background: #001533;
 }
 
-/* Section Title */
-.section-title {
-  text-align: center;
-  font-size: 1.6rem;
-  margin: 2rem 0 1rem;
-  color: #002147;
-  border-bottom: 2px solid #ffd700;
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-/* GA Analytics Section */
+/* Google Analytics Section */
 .ga-analytics {
-  margin: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .analytics-card {
   background: #fff;
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  min-width: 200px;
+  flex: 1 1 200px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .analytics-card h3 {
+  margin-bottom: 0.5rem;
   color: #002147;
-  font-size: 1.2rem;
-  margin-bottom: 0.6rem;
 }
 
 .analytics-card p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #444;
+  color: #1a1a1a;
 }
 
-#gaTrendChart {
-  margin-top: 1rem;
-  width: 100% !important;
-  height: 200px !important;
+/* Section Titles */
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: #002147;
+  border-bottom: 2px solid #ffd700;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
 /* Footer */
@@ -169,4 +185,12 @@ footer {
   margin-top: 2rem;
   font-size: 0.9rem;
   border-top: 3px solid #ffd700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { padding: 0.5rem; }
+  nav { flex-direction: column; }
+  nav a { margin: 0.3rem 0; }
+  .ga-analytics { flex-direction: column; align-items: center; }
 }
