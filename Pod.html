@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header class="header">
     <div class="branding">
       <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
@@ -16,34 +18,51 @@
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="Articles.html">Articles</a>
-      <a href="Pod.html">Podcasts</a>
+      <a href="Pod.html" class="active">Podcasts</a>
       <a href="Infographics.html">Infographics</a>
       <a href="Videos.html">Video Reels</a>
       <a href="Dashboard.html">Dashboard</a>
     </nav>
   </header>
 
-  <section class="content-section">
-    <h2 class="section-title">Podcast Episodes</h2>
-    <div class="podcast-list">
-      <div class="podcast-card">
-        <h3>Episode 1: Defending Our Seas</h3>
-        <audio controls>
-          <source src="assets/episode1.mp3" type="audio/mpeg">
-        </audio>
-      </div>
-      <div class="podcast-card">
-        <h3>Episode 2: Voices from the Fleet</h3>
-        <audio controls>
-          <source src="assets/episode2.mp3" type="audio/mpeg">
-        </audio>
-      </div>
-    </div>
-  </section>
+  <!-- Podcast Episodes Section -->
+  <main>
+    <section class="content-section">
+      <h2 class="section-title">Podcast Episodes</h2>
+      <div class="podcast-list">
+        <article class="podcast-card">
+          <h3>Episode 1: Defending Our Seas</h3>
+          <audio controls style="width:100%;">
+            <source src="assets/episode1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </article>
 
+        <article class="podcast-card">
+          <h3>Episode 2: Voices from the Fleet</h3>
+          <audio controls style="width:100%;">
+            <source src="assets/episode2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </article>
+
+        <article class="podcast-card">
+          <h3>Episode 3: Maritime Security Updates</h3>
+          <audio controls style="width:100%;">
+            <source src="assets/episode3.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Philippine Navy | Digital Hub</p>
   </footer>
+
+  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
