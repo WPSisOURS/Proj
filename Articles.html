@@ -42,7 +42,36 @@
       </article>
     </div>
   </section>
+<section>
+  <h2 class="section-title">Articles</h2>
 
+  <div class="filter-bar">
+    <input type="text" id="articleSearch" placeholder="Search articles...">
+    <select id="articleFilter">
+      <option value="all">All Topics</option>
+      <option value="maritime">Maritime Security</option>
+      <option value="operations">Naval Operations</option>
+      <option value="history">History</option>
+      <option value="community">Community Engagement</option>
+    </select>
+  </div>
+
+  <div class="article-list" id="articleList">
+    <div class="article-card" data-topic="maritime">
+      <img src="assets/article1.jpg" alt="Maritime Awareness">
+      <h3>Maritime Awareness Campaign</h3>
+      <p>Highlighting the importance of protecting Philippine waters...</p>
+      <a href="#">Read Full Article</a>
+    </div>
+
+    <div class="article-card" data-topic="history">
+      <img src="assets/article2.jpg" alt="Naval History">
+      <h3>Legacy of the Philippine Navy</h3>
+      <p>A look into the Navy’s proud history and achievements...</p>
+      <a href="#">Read Full Article</a>
+    </div>
+  </div>
+</section>
   <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Philippine Navy | Digital Hub</p>
