@@ -1,140 +1,114 @@
-// =======================
-// GLOBAL INITIALIZATION
-// =======================
-document.addEventListener("DOMContentLoaded", () => {
-  // Only run dashboard features if elements exist
-  if (document.getElementById("map")) {
-    initDashboard();
+/* ================= Sentiment Chart ================= */
+const ctx = document.getElementById('sentimentChart').getContext('2d');
+const sentimentChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
+    datasets: [
+      { label:"Positive", data:[20,35,40,38,50,65,70], borderColor:"#1e90ff", backgroundColor:"rgba(30,144,255,0.2)", fill:true, tension:0.4 },
+      { label:"Neutral", data:[40,38,35,30,28,25,20], borderColor:"#f1c40f", backgroundColor:"rgba(241,196,15,0.2)", fill:true, tension:0.4 },
+      { label:"Negative", data:[10,12,15,20,25,30,28], borderColor:"#e74c3c", backgroundColor:"rgba(231,76,60,0.2)", fill:true, tension:0.4 }
+    ]
+  },
+  options: { responsive:true, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ beginAtZero:true } } }
+});
+
+/* ================= Live Alerts & Map Sync ================= */
+const alerts = [
+  { text: "⚠️ Fake ship sinking story detected.", type: "negative", coords:[14.5995, 120.9842] },
+  { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", coords:[9.7489, 118.7501] },
+  { text: "⚓ PN rescue op video viral in Palawan.", type: "positive", coords:[9.8500, 118.7500] },
+  { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", coords:[7.1907, 125.4553] },
+  { text: "✅ PN humanitarian mission shared widely.", type: "positive", coords:[10.3157, 123.8854] },
+  { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", coords:[18.1950, 120.5930] }
+];
+let index = 0;
+const alertList = document.getElementById("alertList");
+
+function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
+
+/* ================= Map ================= */
+const map = L.map('map').setView([12.8797, 121.7740], 5); // Philippines
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const markers = { positive:[], neutral:[], negative:[] };
+
+const sentimentIcons = {
+  positive: new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+    shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+    iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+  }),
+  neutral: new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
+    shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+    iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+  }),
+  negative: new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+    shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+    iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
+  })
+};
+
+function addMarker(alert){
+  const marker = L.marker(alert.coords, { icon: sentimentIcons[alert.type] })
+    .addTo(map)
+    .bindPopup(alert.text)
+    .openPopup();
+  markers[alert.type].push(marker);
+
+  if (marker._icon) {
+    marker._icon.style.transition="transform 0.3s ease-in-out";
+    marker._icon.style.transform="scale(1.5)";
+    setTimeout(()=>{ marker._icon.style.transform="scale(1)"; },600);
+  }
+
+  map.setView(alert.coords, 7, { animate:true });
+}
+
+/* ================= Update Alerts + Sync ================= */
+function updateAlerts(){
+  let current = alerts[index];
+  let li = document.createElement("li");
+  li.classList.add(`alert-${current.type}`);
+  li.innerHTML = `<span>${current.text}</span><span class="timestamp">${getTime()}</span>`;
+  alertList.prepend(li);
+  if(alertList.children.length>10){ alertList.removeChild(alertList.lastChild); }
+
+  addMarker(current);
+  index=(index+1)%alerts.length;
+}
+updateAlerts(); setInterval(updateAlerts,4000);
+
+/* ================= Reset Map ================= */
+document.getElementById('resetMapBtn').addEventListener('click', () => {
+  map.setView([12.8797, 121.7740], 5, { animate:true });
+});
+map.on('moveend zoomend', () => {
+  if (map.getZoom() > 5) {
+    document.getElementById('resetMapBtn').classList.add('pulse');
+  } else {
+    document.getElementById('resetMapBtn').classList.remove('pulse');
   }
 });
 
-// =======================
-// DASHBOARD INITIALIZER
-// =======================
-function initDashboard() {
-  // -----------------------
-  // MAP SETUP
-  // -----------------------
-  const map = L.map("map").setView([12.8797, 121.7740], 5); // Philippines center
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "© OpenStreetMap contributors"
-  }).addTo(map);
-
-  const markers = { positive: [], negative: [], neutral: [] };
-  const sentimentIcons = {
-    positive: L.icon({ iconUrl: "assets/icons/positive.png", iconSize: [30, 30] }),
-    negative: L.icon({ iconUrl: "assets/icons/negative.png", iconSize: [30, 30] }),
-    neutral:  L.icon({ iconUrl: "assets/icons/neutral.png",  iconSize: [30, 30] })
-  };
-
-  // -----------------------
-  // CHART SETUP
-  // -----------------------
-  const ctx = document.getElementById("sentimentChart");
-  let sentimentChart;
-  if (ctx) {
-    sentimentChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: [],
-        datasets: [
-          { label: "Positive", borderColor: "#28a745", backgroundColor: "rgba(40,167,69,0.2)", data: [] },
-          { label: "Negative", borderColor: "#dc3545", backgroundColor: "rgba(220,53,69,0.2)", data: [] },
-          { label: "Neutral",  borderColor: "#ffc107", backgroundColor: "rgba(255,193,7,0.2)", data: [] }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: "top" } },
-        animation: { duration: 500 },
-        scales: { y: { beginAtZero: true } }
-      }
-    });
-  }
-
-  // -----------------------
-  // ALERTS + DATA LOOP
-  // -----------------------
-  const alerts = [
-    { text: "Fake news spike detected in Luzon", type: "negative", coords: [15.0, 121.0] },
-    { text: "Positive engagement on naval exercise", type: "positive", coords: [10.3, 123.9] },
-    { text: "Neutral discussion on maritime law", type: "neutral", coords: [14.6, 120.9] }
-  ];
-  let alertIndex = 0;
-
-  function pushAlert(alert) {
-    const feed = document.getElementById("alertFeed");
-    if (!feed) return;
-
-    // Add feed entry
-    const entry = document.createElement("div");
-    entry.className = `alert-item ${alert.type}`;
-    entry.textContent = `[${alert.type.toUpperCase()}] ${alert.text}`;
-    feed.prepend(entry);
-
-    // Add chart point
-    if (sentimentChart) {
-      const now = new Date().toLocaleTimeString();
-      sentimentChart.data.labels.push(now);
-      sentimentChart.data.datasets.forEach(ds => {
-        if (ds.label.toLowerCase() === alert.type) {
-          ds.data.push(ds.data.length + 1);
-        } else {
-          ds.data.push(ds.data.length);
-        }
-      });
-      sentimentChart.update();
-    }
-
-    // Add map marker
-    addMarker(alert);
-  }
-
-  function addMarker(alert) {
-    const marker = L.marker(alert.coords, { icon: sentimentIcons[alert.type] })
-      .addTo(map)
-      .bindPopup(alert.text)
-      .openPopup();
-
-    markers[alert.type].push(marker);
-
-    // Flash animation
-    marker._icon.style.transition = "transform 0.3s ease-in-out";
-    marker._icon.style.transform = "scale(1.5)";
-    setTimeout(() => { marker._icon.style.transform = "scale(1)"; }, 600);
-
-    // Auto zoom & pan
-    map.setView(alert.coords, 7, { animate: true });
-  }
-
-  // -----------------------
-  // RESET MAP BUTTON
-  // -----------------------
-  const resetBtn = document.getElementById("resetMapBtn");
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      map.setView([12.8797, 121.7740], 5);
-    });
-
-    // Pulse if zoomed in
-    map.on("moveend zoomend", () => {
-      if (map.getZoom() > 5) {
-        resetBtn.classList.add("pulse");
-      } else {
-        resetBtn.classList.remove("pulse");
-      }
-    });
-  }
-
-  // -----------------------
-  // CONTINUOUS ALERTS LOOP
-  // -----------------------
-  setInterval(() => {
-    pushAlert(alerts[alertIndex]);
-    alertIndex = (alertIndex + 1) % alerts.length;
-  }, 4000);
-}
-
+/* ================= Google Analytics Chart ================= */
+const gaCtx = document.getElementById("gaTrendChart").getContext("2d");
+new Chart(gaCtx, {
+  type: "bar",
+  data: {
+    labels: ["Page A","Page B","Page C","Page D"],
+    datasets: [{
+      label: "Visits",
+      data: [120, 90, 60, 150],
+      backgroundColor: ["#1e90ff","#f1c40f","#e74c3c","#2ecc71"]
+    }]
+  },
+  options: { responsive:true, plugins:{ legend:{ display:false } } }
+});
 // Article search + filter
 const articleSearch = document.getElementById("articleSearch");
 const articleFilter = document.getElementById("articleFilter");
