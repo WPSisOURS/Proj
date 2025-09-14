@@ -199,3 +199,56 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
+// GA Trend Chart (Users over last minute)
+const ctxGA = document.getElementById("gaTrendChart").getContext("2d");
+const gaData = {
+  labels: [],
+  datasets: [{
+    label: "Active Users",
+    data: [],
+    borderColor: "#002147",
+    backgroundColor: "rgba(0,33,71,0.2)",
+    fill: true,
+    tension: 0.4
+  }]
+};
+
+const gaTrendChart = new Chart(ctxGA, {
+  type: "line",
+  data: gaData,
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false }},
+    scales: {
+      x: { display: true, title: { display: false }},
+      y: { beginAtZero: true }
+    }
+  }
+});
+
+// Modify mockGAData to also update chart
+function mockGAData() {
+  const users = Math.floor(Math.random() * 50) + 10; // 10-60 users
+  const pages = ["Home", "Articles", "Infographics", "Videos", "Dashboard"];
+  const topPage = pages[Math.floor(Math.random() * pages.length)];
+  const bounce = (Math.random() * 30 + 20).toFixed(1); // 20-50%
+
+  document.getElementById("gaUsers").innerText = users;
+  document.getElementById("gaPage").innerText = topPage;
+  document.getElementById("gaBounce").innerText = bounce + "%";
+
+  // Add to chart (keep last 12 points ~ 1 minute at 5s interval)
+  const timeLabel = new Date().toLocaleTimeString().slice(3,8); // MM:SS
+  gaData.labels.push(timeLabel);
+  gaData.datasets[0].data.push(users);
+
+  if (gaData.labels.length > 12) {
+    gaData.labels.shift();
+    gaData.datasets[0].data.shift();
+  }
+  gaTrendChart.update();
+}
+
+// Update every 5 seconds
+setInterval(mockGAData, 5000);
+mockGAData(); // run once at start
