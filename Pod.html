@@ -3,34 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Podcasts | PN ANCHOR Hub</title>
+  <title>PN Podcasts | Digital Hub</title>
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-<header>
-  <h1>Podcast Corner</h1>
-  <nav>
+  <header class="header">
+    <div class="branding">
+      <img src="assets/pn-logo.png" alt="PN Logo" class="logo">
+      <h1>Philippine Navy Digital Hub</h1>
+      <p class="tagline">Voices from the Fleet</p>
+    </div>
+    <nav class="nav">
       <a href="index.html">Home</a>
       <a href="Articles.html">Articles</a>
-      <a href="Infographics.html">Infographics</a>
       <a href="Pod.html">Podcasts</a>
-      <a href="Videos.html">Videos</a>
+      <a href="Infographics.html">Infographics</a>
+      <a href="Videos.html">Video Reels</a>
       <a href="Dashboard.html">Dashboard</a>
-      <a href="About.html">About</a>
-  </nav>
-</header>
+    </nav>
+  </header>
 
-<section>
-  <article>
-    <h3>Episode 1: Defending the Digital Seas</h3>
-    <audio controls>
-      <source src="assets/audio/episode1.mp3" type="audio/mpeg">
-    </audio>
-  </article>
-</section>
+  <section class="content-section">
+    <h2 class="section-title">Podcast Episodes</h2>
+    <div class="podcast-list">
+      <div class="podcast-card">
+        <h3>Episode 1: Defending Our Seas</h3>
+        <audio controls>
+          <source src="assets/episode1.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div class="podcast-card">
+        <h3>Episode 2: Voices from the Fleet</h3>
+        <audio controls>
+          <source src="assets/episode2.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <p>Philippine Navy Digital Hub</p>
-</footer>
+  <footer class="footer">
+    <p>&copy; 2025 Philippine Navy | Digital Hub</p>
+  </footer>
 </body>
 </html>
