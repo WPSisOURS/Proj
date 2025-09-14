@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
     <div class="branding">
@@ -16,7 +17,7 @@
     </div>
     <nav class="nav">
       <a href="index.html">Home</a>
-      <a href="Articles.html">Articles</a>
+      <a href="Articles.html" class="active">Articles</a>
       <a href="Pod.html">Podcasts</a>
       <a href="Infographics.html">Infographics</a>
       <a href="Videos.html">Video Reels</a>
@@ -24,58 +25,92 @@
     </nav>
   </header>
 
-<section>
-  <h2 class="section-title">Articles</h2>
+  <!-- Articles Section -->
+  <section>
+    <h2 class="section-title">Articles</h2>
 
-  <div class="filter-bar">
-    <input type="text" id="articleSearch" placeholder="Search articles...">
-    <select id="articleFilter">
-      <option value="all">All Topics</option>
-      <option value="maritime">Maritime Security</option>
-      <option value="operations">Naval Operations</option>
-      <option value="history">History</option>
-      <option value="community">Community Engagement</option>
-    </select>
-  </div>
-
-  <div class="article-list" id="articleList">
-    <div class="article-card" data-topic="maritime">
-      <img src="assets/article1.jpg" alt="Maritime Awareness">
-      <h3>Maritime Awareness Campaign</h3>
-      <p>Highlighting the importance of protecting Philippine waters...</p>
-      <a href="#">Read Full Article</a>
+    <!-- Filter/Search Bar -->
+    <div class="filter-bar">
+      <input type="text" id="articleSearch" placeholder="Search articles...">
+      <select id="articleFilter">
+        <option value="all">All Topics</option>
+        <option value="maritime">Maritime Security</option>
+        <option value="operations">Naval Operations</option>
+        <option value="history">History</option>
+        <option value="community">Community Engagement</option>
+      </select>
     </div>
 
-    <div class="article-card" data-topic="history">
-      <img src="assets/article2.jpg" alt="Naval History">
-      <h3>Legacy of the Philippine Navy</h3>
-      <p>A look into the Navy’s proud history and achievements...</p>
-      <a href="#">Read Full Article</a>
-    </div>
-    <!-- Articles -->
-  <section class="content-section">
-    <h2 class="section-title">Featured Articles</h2>
-    <div class="article-list">
-      <article class="article-card">
-        <img src="assets/article1.jpg" alt="">
-        <h3>Countering Maritime Disinformation</h3>
-        <p>How PN leverages narratives to combat fake news and defend national interest...</p>
+    <!-- Main Article List -->
+    <div class="article-list" id="articleList">
+      <article class="article-card" data-topic="maritime">
+        <img src="assets/article1.jpg" alt="Maritime Awareness">
+        <h3>Maritime Awareness Campaign</h3>
+        <p>Highlighting the importance of protecting Philippine waters...</p>
         <a href="#">Read Full Article</a>
       </article>
-      <article class="article-card">
-        <img src="assets/article2.jpg" alt="">
-        <h3>Naval Exercises in Focus</h3>
-        <p>Building resilience and transparency to strengthen public confidence...</p>
+
+      <article class="article-card" data-topic="history">
+        <img src="assets/article2.jpg" alt="Naval History">
+        <h3>Legacy of the Philippine Navy</h3>
+        <p>A look into the Navy’s proud history and achievements...</p>
         <a href="#">Read Full Article</a>
       </article>
     </div>
+
+    <!-- Featured Articles Section -->
+    <section class="content-section">
+      <h2 class="section-title">Featured Articles</h2>
+      <div class="article-list">
+        <article class="article-card" data-topic="operations">
+          <img src="assets/article3.jpg" alt="Countering Disinformation">
+          <h3>Countering Maritime Disinformation</h3>
+          <p>How PN leverages narratives to combat fake news and defend national interest...</p>
+          <a href="#">Read Full Article</a>
+        </article>
+
+        <article class="article-card" data-topic="community">
+          <img src="assets/article4.jpg" alt="Naval Exercises">
+          <h3>Naval Exercises in Focus</h3>
+          <p>Building resilience and transparency to strengthen public confidence...</p>
+          <a href="#">Read Full Article</a>
+        </article>
+      </div>
+    </section>
   </section>
-  </div>
-</section>
+
   <!-- Footer -->
   <footer class="footer">
     <p>&copy; 2025 Philippine Navy | Digital Hub</p>
   </footer>
+
+  <!-- Script -->
   <script src="script.js"></script>
+  <script>
+    // Simple Filter/Search Functionality
+    const searchInput = document.getElementById('articleSearch');
+    const filterSelect = document.getElementById('articleFilter');
+    const articles = document.querySelectorAll('#articleList .article-card');
+
+    function filterArticles() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filterTopic = filterSelect.value;
+
+      articles.forEach(article => {
+        const title = article.querySelector('h3').textContent.toLowerCase();
+        const topic = article.getAttribute('data-topic');
+
+        if ((title.includes(searchTerm) || searchTerm === '') &&
+            (filterTopic === 'all' || filterTopic === topic)) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterArticles);
+    filterSelect.addEventListener('change', filterArticles);
+  </script>
 </body>
 </html>
