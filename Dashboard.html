@@ -2,140 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PN Digital Hub – Monitoring Dashboard</title>
-  <link rel="stylesheet" href="Style.css">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQJMYBDKX1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-SQJMYBDKX1'); 
-  </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PN Digital Hub Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Leaflet (Map) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- ✅ Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQJMYBDKX1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
 
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #002147; /* Navy blue */
-      color: #fff;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    header img { height: 45px; }
-    nav {
-      background: #01336e;
-      display: flex;
-      justify-content: center;
-      padding: 10px 0;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover { color: #f1c40f; }
-    .container {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-    }
-    .full { grid-column: span 2; }
-    .card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top: 0;
-      font-size: 1.2em;
-      color: #002147;
-    }
-    /* Live Alert Feed */
-    .feed { height: 280px; overflow-y: auto; }
-    .feed ul { list-style: none; margin: 0; padding: 0; }
-    .feed li {
-      padding: 8px;
-      margin-bottom: 6px;
-      border-radius: 6px;
-      color: #fff;
-      font-weight: 500;
-      animation: fadeIn 0.5s ease-in-out;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .feed .timestamp { font-size: 0.8em; margin-left: 10px; opacity: 0.8; }
-    .alert-positive { background: rgba(30,144,255,0.9); }
-    .alert-neutral { background: rgba(241,196,15,0.9); color: #222; }
-    .alert-negative { background: rgba(231,76,60,0.9); }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* Map */
-    #map {
-      width: 100%;
-      height: 400px;
-      border-radius: 10px;
-    }
-    /* Reset Button */
-    #resetMapBtn {
-      position: absolute;
-      top: 100px;
-      right: 30px;
-      background: #002147;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background 0.3s, transform 0.2s;
-      z-index: 1000;
-    }
-    #resetMapBtn:hover {
-      background: #013d84;
-      transform: scale(1.05);
-    }
-    .pulse {
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(0, 33, 71, 0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(0, 33, 71, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(0, 33, 71, 0); }
-    }
-  </style>
+    // Replace with your GA Measurement ID (from Google Analytics)
+    gtag("config", "G-SQJMYBDKX1");
+  </script>
 </head>
 <body>
-
   <header>
-    <div style="display:flex;align-items:center;gap:10px;">
-      <img src="assets/pn-logo.png" alt="PN Logo">
-      <h1>PN Monitoring Dashboard</h1>
-    </div>
+    <h1>Philippine Navy Digital Hub</h1>
     <div>Powered by PN Digital Hub</div>
   </header>
 
@@ -146,7 +34,7 @@
     <a href="Infographics.html">Infographics</a>
     <a href="Pod.html">Podcasts</a>
     <a href="Videos.html">Video Reels</a>
-    <a href="Dashboard.html">Dashboard</a>
+    <a href="Dashboard.html" class="active">Dashboard</a>
   </nav>
 
   <div class="container">
@@ -159,7 +47,9 @@
     <!-- Live Alerts -->
     <div class="card">
       <h2>Live Alerts Feed</h2>
-      <div class="feed"><ul id="alertList"></ul></div>
+      <div class="feed">
+        <ul id="alertList" role="log" aria-live="polite"></ul>
+      </div>
     </div>
 
     <!-- Map -->
@@ -170,116 +60,20 @@
     </div>
   </div>
 
-  <section class="ga-analytics">
-  <h2 class="section-title">Google Analytics Overview</h2>
-  <div class="analytics-card">
-    <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
-    <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
-    <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
-    <canvas id="gaTrendChart" width="300" height="120"></canvas>
-  </div>
+  <!-- Google Analytics Overview -->
+  <section class="ga-analytics card">
+    <h2 class="section-title">Google Analytics Overview</h2>
+    <div class="analytics-card">
+      <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
+      <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
+      <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
+      <canvas id="gaTrendChart" width="300" height="120"></canvas>
+    </div>
   </section>
 
-  <script>
-    /* Sentiment Chart */
-    const ctx = document.getElementById('sentimentChart').getContext('2d');
-    const sentimentChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
-        datasets: [
-          { label:"Positive", data:[20,35,40,38,50,65,70], borderColor:"#1e90ff", backgroundColor:"rgba(30,144,255,0.2)", fill:true, tension:0.4 },
-          { label:"Neutral", data:[40,38,35,30,28,25,20], borderColor:"#f1c40f", backgroundColor:"rgba(241,196,15,0.2)", fill:true, tension:0.4 },
-          { label:"Negative", data:[10,12,15,20,25,30,28], borderColor:"#e74c3c", backgroundColor:"rgba(231,76,60,0.2)", fill:true, tension:0.4 }
-        ]
-      },
-      options: { responsive:true, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ beginAtZero:true } } }
-    });
-
-    /* Alerts & Sync with Map */
-    const alerts = [
-      { text: "⚠️ Fake ship sinking story detected.", type: "negative", coords:[14.5995, 120.9842] },
-      { text: "🔥 #WestPhilippineSea trending positively.", type: "positive", coords:[9.7489, 118.7501] },
-      { text: "⚓ PN rescue op video viral in Palawan.", type: "positive", coords:[9.8500, 118.7500] },
-      { text: "🚨 Bot network spreading anti-AFP propaganda.", type: "negative", coords:[7.1907, 125.4553] },
-      { text: "✅ PN humanitarian mission shared widely.", type: "positive", coords:[10.3157, 123.8854] },
-      { text: "🛰 Satellite imagery debunked propaganda.", type: "neutral", coords:[18.1950, 120.5930] }
-    ];
-    let index = 0;
-    const alertList = document.getElementById("alertList");
-
-    function getTime(){ const now=new Date(); return now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }
-
-    /* Map */
-    const map = L.map('map').setView([12.8797, 121.7740], 5); // Philippines
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    const markers = { positive:[], neutral:[], negative:[] };
-
-    const sentimentIcons = {
-      positive: new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
-        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
-      }),
-      neutral: new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png',
-        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
-        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
-      }),
-      negative: new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-        shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
-        iconSize: [25,41], iconAnchor: [12,41], popupAnchor: [1,-34], shadowSize: [41,41]
-      })
-    };
-
-    function addMarker(alert){
-      const marker = L.marker(alert.coords, { icon: sentimentIcons[alert.type] })
-        .addTo(map)
-        .bindPopup(alert.text)
-        .openPopup();
-      markers[alert.type].push(marker);
-
-      // Flash effect
-      marker._icon.style.transition="transform 0.3s ease-in-out";
-      marker._icon.style.transform="scale(1.5)";
-      setTimeout(()=>{ marker._icon.style.transform="scale(1)"; },600);
-
-      // Auto zoom
-      map.setView(alert.coords, 7, { animate:true });
-    }
-
-    /* Update alerts + sync */
-    function updateAlerts(){
-      let current = alerts[index];
-      let li = document.createElement("li");
-      li.classList.add(`alert-${current.type}`);
-      li.innerHTML = `<span>${current.text}</span><span class="timestamp">${getTime()}</span>`;
-      alertList.prepend(li);
-      if(alertList.children.length>10){ alertList.removeChild(alertList.lastChild); }
-
-      // Update map
-      addMarker(current);
-
-      index=(index+1)%alerts.length;
-    }
-    updateAlerts(); setInterval(updateAlerts,4000);
-
-    /* Reset Map */
-    document.getElementById('resetMapBtn').addEventListener('click', () => {
-      map.setView([12.8797, 121.7740], 5, { animate:true });
-    });
-    map.on('moveend zoomend', () => {
-      if (map.getZoom() > 5) {
-        document.getElementById('resetMapBtn').classList.add('pulse');
-      } else {
-        document.getElementById('resetMapBtn').classList.remove('pulse');
-      }
-    });
-  </script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- External Script -->
   <script src="script.js"></script>
 </body>
 </html>
