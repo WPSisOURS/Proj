@@ -134,3 +134,30 @@ function initDashboard() {
     alertIndex = (alertIndex + 1) % alerts.length;
   }, 4000);
 }
+
+// Article search + filter
+const articleSearch = document.getElementById("articleSearch");
+const articleFilter = document.getElementById("articleFilter");
+const articles = document.querySelectorAll("#articleList .article-card");
+
+function filterArticles() {
+  const searchText = articleSearch.value.toLowerCase();
+  const filterValue = articleFilter.value;
+
+  articles.forEach(article => {
+    const title = article.querySelector("h3").innerText.toLowerCase();
+    const topic = article.getAttribute("data-topic");
+
+    if (
+      (title.includes(searchText) || searchText === "") &&
+      (filterValue === "all" || filterValue === topic)
+    ) {
+      article.style.display = "block";
+    } else {
+      article.style.display = "none";
+    }
+  });
+}
+
+articleSearch.addEventListener("input", filterArticles);
+articleFilter.addEventListener("change", filterArticles);
