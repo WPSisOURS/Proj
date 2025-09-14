@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PN Digital Hub Dashboard</title>
-  <link rel="stylesheet" href="Style.css" /> <!-- ✅ match exact filename -->
-
+  <link rel="stylesheet" href="Style.css" />
+  
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- ✅ Google Analytics -->
+  <!-- ✅ Google Analytics Tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQJMYBDKX1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag("js", new Date());
     gtag("config", "G-SQJMYBDKX1");
   </script>
@@ -37,7 +37,7 @@
     <a href="Dashboard.html" class="active">Dashboard</a>
   </nav>
 
-  <main class="container">
+  <div class="container">
     <!-- Sentiment Chart -->
     <div class="card">
       <h2>Sentiment Trend (Last 7 Days)</h2>
@@ -58,22 +58,44 @@
       <div id="map"></div>
       <button id="resetMapBtn">🔄 Reset Map</button>
     </div>
-  </main>
+  </div>
 
   <!-- Google Analytics Overview -->
-  <section class="ga-analytics card">
-    <h2 class="section-title">Google Analytics Overview</h2>
+  <h2 class="section-title">Google Analytics Overview</h2>
+  <section class="ga-analytics">
+    <!-- Real-time Users -->
     <div class="analytics-card">
-      <p><strong>Real-time Users:</strong> <span id="gaUsers">Loading...</span></p>
-      <p><strong>Top Active Page:</strong> <span id="gaPage">Loading...</span></p>
-      <p><strong>Bounce Rate:</strong> <span id="gaBounce">Loading...</span></p>
-      <canvas id="gaTrendChart" width="300" height="120"></canvas>
+      <h3>👥 Real-time Users</h3>
+      <p id="gaUsers">Loading...</p>
+    </div>
+
+    <!-- Top Active Page -->
+    <div class="analytics-card">
+      <h3>📄 Top Active Page</h3>
+      <p id="gaPage">Loading...</p>
+    </div>
+
+    <!-- Bounce Rate -->
+    <div class="analytics-card">
+      <h3>↩️ Bounce Rate</h3>
+      <p id="gaBounce">Loading...</p>
+    </div>
+
+    <!-- Trend Chart -->
+    <div class="analytics-card">
+      <h3>📈 User Trend (7 Days)</h3>
+      <canvas id="gaTrendChart"></canvas>
     </div>
   </section>
 
+  <footer>
+    <p>© 2025 Philippine Navy Digital Hub. All Rights Reserved.</p>
+  </footer>
+
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <!-- External Script -->
-  <script src="script.js" defer></script> <!-- ✅ defer ensures DOM is ready -->
+  <script src="script.js"></script>
 </body>
 </html>
