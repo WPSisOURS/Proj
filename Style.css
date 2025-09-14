@@ -1,189 +1,189 @@
-/* ====== GLOBAL ====== */
-body {
+/* 🌊 Philippine Navy Digital Hub Styles */
+
+/* Base Reset */
+* {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f8fb;
-  color: #333;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f4f6fa;
+  color: #1a1a1a;
   line-height: 1.6;
 }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; display: block; }
 
-/* ====== HEADER ====== */
+/* Header & Branding */
 .header {
-  background: #002147; /* Navy blue */
+  background: #002147; /* Navy Blue */
   color: #fff;
-  padding: 20px;
+  padding: 1rem 2rem;
   text-align: center;
-}
-.header .branding {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.header .logo {
-  width: 70px;
-  margin-bottom: 10px;
-}
-.header h1 {
-  margin: 5px 0;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-.header .tagline {
-  font-size: 0.95rem;
-  font-style: italic;
-  color: #c9d6e6;
+  border-bottom: 5px solid #ffd700; /* Gold accent */
 }
 
-/* NAVIGATION */
+.header .branding .logo {
+  height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.header .tagline {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Navigation */
 .nav {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
+
 .nav a {
-  color: #ffd700; /* Gold accent */
-  margin: 0 12px;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ffd700;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: 0.3s;
 }
+
 .nav a:hover {
   color: #fff;
 }
 
-/* ====== HERO ====== */
-.hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  background: #013d84;
-  color: #fff;
-  padding: 40px 20px;
-}
-.hero-text {
-  flex: 1;
-  min-width: 280px;
-  padding: 20px;
-}
-.hero-text h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-.hero-text p {
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-}
-.hero .btn {
-  background: #ffd700;
+/* Section Title */
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 2rem 0 1rem;
   color: #002147;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-.hero .btn:hover {
-  background: #e6c200;
-}
-.hero-image {
-  flex: 1;
-  min-width: 280px;
-  padding: 20px;
+  border-bottom: 2px solid #ffd700;
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
-/* ====== QUICK LINKS ====== */
-.quick-links {
-  text-align: center;
-  padding: 40px 20px;
+/* Article Cards */
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 2rem;
 }
-.quick-links h3 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-.card {
+
+.article-card {
   background: #fff;
-  color: #002147;
-  border: 2px solid #002147;
-  padding: 20px;
-  border-radius: 8px;
-  width: 150px;
-  font-weight: bold;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
 }
-.card i {
-  font-size: 1.8rem;
-  margin-bottom: 8px;
-  color: #013d84;
-}
-.card:hover {
-  background: #002147;
-  color: #fff;
+
+.article-card:hover {
   transform: translateY(-5px);
 }
-.card:hover i {
+
+.article-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.article-card h3 {
+  font-size: 1.2rem;
+  margin: 0.8rem;
+  color: #002147;
+}
+
+.article-card p {
+  margin: 0 0.8rem 1rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.article-card a {
+  display: block;
+  margin: 0.8rem;
+  text-align: right;
+  color: #002147;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.article-card a:hover {
   color: #ffd700;
 }
 
-/* ====== FEATURED ====== */
-.featured {
-  padding: 40px 20px;
-  background: #eef3f9;
-}
-.featured h3 {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-.featured-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-.featured-item {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 300px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease-in-out;
-}
-.featured-item:hover {
-  transform: translateY(-8px);
-}
-.featured-item h4 {
-  font-size: 1.2rem;
-  margin: 10px;
-  color: #002147;
-}
-.featured-item p {
-  font-size: 0.95rem;
-  margin: 10px;
-}
-.read-more {
-  display: block;
-  padding: 10px;
-  background: #013d84;
-  color: #fff;
-  text-align: center;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-.read-more:hover {
-  background: #002147;
+/* Podcast Cards */
+.podcast-list {
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-/* ====== FOOTER ====== */
+.podcast-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.podcast-card h3 {
+  margin-bottom: 0.5rem;
+  color: #002147;
+}
+
+/* Infographics Grid */
+.grid-gallery {
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-gallery img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.grid-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Video Grid */
+.video-grid {
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.video-item h4 {
+  margin-top: 0.5rem;
+  color: #002147;
+}
+
+/* Footer */
 .footer {
   background: #002147;
-  color: #c9d6e6;
+  color: #fff;
   text-align: center;
-  padding: 20px;
+  padding: 1rem;
+  margin-top: 2rem;
   font-size: 0.9rem;
+  border-top: 3px solid #ffd700;
 }
