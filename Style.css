@@ -196,6 +196,7 @@ canvas {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+
 /* Gallery Grid */
 .grid-gallery {
   display: grid;
